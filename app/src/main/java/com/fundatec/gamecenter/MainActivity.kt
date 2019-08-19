@@ -1,7 +1,6 @@
 package com.fundatec.gamecenter
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu
 import android.view.MenuItem
@@ -11,6 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
+import com.fundatec.gamecenter.adapter.NewsAdapter
+import com.fundatec.gamecenter.jsonData.Article
+import com.fundatec.gamecenter.jsonData.NewsData
+import com.fundatec.gamecenter.request.GsonRequest
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -35,7 +38,8 @@ class MainActivity : AppCompatActivity() {
 
         var request = GsonRequest(
             url, NewsData::class.java, null, Response.Listener { response ->
-                var adapter = CustomAdapter(baseContext, response.articles as ArrayList<Article>)
+                var adapter =
+                    NewsAdapter(baseContext, response.articles as ArrayList<Article>)
                 recyclerView.adapter = adapter
 
             },

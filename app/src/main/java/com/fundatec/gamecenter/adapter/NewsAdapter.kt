@@ -1,21 +1,18 @@
-package com.fundatec.gamecenter
+package com.fundatec.gamecenter.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.news_list.view.*
-import androidx.core.content.ContextCompat.startActivity
 import android.content.Intent
 import android.net.Uri
-import androidx.core.content.ContextCompat.startActivity
+import com.fundatec.gamecenter.jsonData.Article
+import com.fundatec.gamecenter.R
 
 
-
-
-class CustomAdapter(var context: Context, var news: ArrayList<Article>) : androidx.recyclerview.widget.RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+class NewsAdapter(var context: Context, var news: ArrayList<Article>) : androidx.recyclerview.widget.RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.news_list, parent, false)

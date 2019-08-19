@@ -1,4 +1,4 @@
-package com.fundatec.gamecenter
+package com.fundatec.gamecenter.jsonData
 import com.google.gson.annotations.SerializedName
 
 

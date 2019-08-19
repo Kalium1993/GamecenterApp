@@ -1,4 +1,4 @@
-package com.fundatec.gamecenter
+package com.fundatec.gamecenter.request
 
 import com.android.volley.NetworkResponse
 import com.android.volley.ParseError
