@@ -1,5 +1,6 @@
 package com.fundatec.gamecenter
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu
@@ -28,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         queue = Volley.newRequestQueue(baseContext)
-        recyclerView.layoutManager = LinearLayoutManager(baseContext, RecyclerView.VERTICAL, false)
+        recyclerNews.layoutManager = LinearLayoutManager(baseContext, RecyclerView.VERTICAL, false)
         readNews()
 
     }
@@ -40,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             url, NewsData::class.java, null, Response.Listener { response ->
                 var adapter =
                     NewsAdapter(baseContext, response.articles as ArrayList<Article>)
-                recyclerView.adapter = adapter
+                recyclerNews.adapter = adapter
 
             },
             Response.ErrorListener { error ->
@@ -61,7 +62,18 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.action_home ->{
+                this.startActivity(Intent(this,MainActivity::class.java))
+
+                true
+            }
+
+            R.id.action_produtos ->{
+                this.startActivity(Intent(this,ProdutosActivity::class.java))
+
+                true
+            }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
