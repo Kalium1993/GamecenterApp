@@ -12,7 +12,8 @@ import com.fundatec.gamecenter.jsonData.Article
 import com.fundatec.gamecenter.R
 
 
-class NewsAdapter(var context: Context, var news: ArrayList<Article>) : androidx.recyclerview.widget.RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
+class NewsAdapter(var context: Context, var news: ArrayList<Article>)
+    : androidx.recyclerview.widget.RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.news_list, parent, false)

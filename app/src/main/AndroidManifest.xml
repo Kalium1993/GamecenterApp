@@ -12,6 +12,21 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
+                android:name=".NewsActivity"
+                android:label="@string/title_activity_news"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+                android:name=".VendedorActivity"
+                android:label="@string/title_activity_vendedor"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+                android:name=".RankingVendedoresActivity"
+                android:label="@string/title_activity_ranking_vendedores"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
                 android:name=".ProdutosActivity"
                 android:label="@string/title_activity_produtos"
                 android:theme="@style/AppTheme.NoActionBar">

@@ -9,10 +9,11 @@ import com.fundatec.gamecenter.jsonData.ProdutosData
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.produtos_list.view.*
 
-class ProdutosAdapter(var context: Context, var produtos: ArrayList<ProdutosData>) : androidx.recyclerview.widget.RecyclerView.Adapter<ProdutosAdapter.ViewHolder>() {
+class ProdutosAdapter(var context: Context, var produtos: ArrayList<ProdutosData>)
+    : androidx.recyclerview.widget.RecyclerView.Adapter<ProdutosAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.news_list, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.produtos_list, parent, false)
         return ViewHolder(v, context)
     }
 

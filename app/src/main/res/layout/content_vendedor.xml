@@ -6,12 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:showIn="@layout/activity_main"
-        tools:context=".MainActivity">
-    <ImageView
-            android:layout_width="119dp"
-            android:layout_height="114dp" app:srcCompat="@drawable/top_badge"
-            android:id="@+id/openRankingVendedores" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="8dp" android:layout_marginStart="8dp"/>
+        tools:showIn="@layout/activity_vendedor"
+        tools:context=".VendedorActivity">
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -39,9 +39,9 @@ class ProdutosActivity : AppCompatActivity() {
         var url = "https://gamecenter-api.herokuapp.com/gamecenter/produtos"
 
         var request = GsonRequest(
-            url, ProdutosData::class.java, null, Response.Listener { response ->
+            url, Array<ProdutosData>::class.java, null, Response.Listener { response ->
                 var adapter =
-                    ProdutosAdapter(baseContext, response as ArrayList<ProdutosData>)
+                    ProdutosAdapter(baseContext, ArrayList(response.toList()))
                 recyclerProdutos.adapter = adapter
 
             },
@@ -54,20 +54,36 @@ class ProdutosActivity : AppCompatActivity() {
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_home -> {
-                this.startActivity(Intent(this, MainActivity::class.java))
+            R.id.action_home ->{
+                this.startActivity(Intent(this,MainActivity::class.java))
 
                 true
             }
 
-            R.id.action_produtos -> {
-                this.startActivity(Intent(this, ProdutosActivity::class.java))
+            R.id.action_news ->{
+                this.startActivity(Intent(this,NewsActivity::class.java))
+
+                true
+            }
+
+            R.id.action_produtos ->{
+                this.startActivity(Intent(this,ProdutosActivity::class.java))
+
+                true
+            }
+
+            R.id.action_rankingVendedores ->{
+                this.startActivity(Intent(this,RankingVendedoresActivity::class.java))
 
                 true
             }

@@ -7,8 +7,8 @@
                                                    android:layout_height="wrap_content" android:id="@+id/linearLayout2">
 
     <ImageView
-            android:layout_width="132dp"
-            android:layout_height="153dp" app:srcCompat="@drawable/no_img"
+            android:layout_width="145dp"
+            android:layout_height="145dp" app:srcCompat="@drawable/no_img"
             android:id="@+id/imagemProduto" android:layout_marginTop="8dp"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="8dp" android:layout_marginStart="8dp"/>

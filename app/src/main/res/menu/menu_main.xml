@@ -8,6 +8,11 @@
           android:orderInCategory="100"
           app:showAsAction="never"/>
 
+    <item android:id="@+id/action_news"
+          android:title="@string/action_news"
+          android:orderInCategory="100"
+          app:showAsAction="never"/>
+
     <item android:id="@+id/action_produtos"
           android:title="@string/action_produtos"
           android:orderInCategory="100"
