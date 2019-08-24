@@ -8,12 +8,13 @@ import com.fundatec.gamecenter.R
 import com.fundatec.gamecenter.jsonData.ProdutosData
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.produtos_list.view.*
+import kotlinx.android.synthetic.main.produtos_vendedor.view.*
 
-class ProdutosAdapter(var context: Context, var produtos: ArrayList<ProdutosData>)
-    : androidx.recyclerview.widget.RecyclerView.Adapter<ProdutosAdapter.ViewHolder>() {
+class VendedorAdapter(var context: Context, var produtos: ArrayList<ProdutosData>)
+    : androidx.recyclerview.widget.RecyclerView.Adapter<VendedorAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.produtos_list, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.produtos_vendedor, parent, false)
         return ViewHolder(v, context)
     }
 
@@ -42,9 +43,18 @@ class ProdutosAdapter(var context: Context, var produtos: ArrayList<ProdutosData
 
         fun bindItems(item: ProdutosData) {
 
-            itemView.nomeProduto.text = item.nome
-            itemView.descricaoProduto.text = item.descricao
-            Picasso.get().load(item.imagem).placeholder(R.drawable.no_img).fit().centerCrop().into(itemView.imagemProduto)
+            itemView.nomeProdutoVendedor.text = item.nome
+            Picasso.get().load(item.imagem).placeholder(R.drawable.no_img).fit().centerCrop().into(itemView.imagemProdutoVendedor)
+            if (!item.vendido) {
+                itemView.descricaoProdutoVendedor.text = item.descricao
+                itemView.notaVenda.text = ""
+                itemView.vendido.text = "Produto á Venda!"
+            } else {
+                itemView.descricaoProdutoVendedor.text = "Comentário do Comprador: \n" + item.cmmComprador
+                itemView.notaVenda.text = "Nota da Venda: " + item.notaVenda.toString()
+                itemView.vendido.text = "Produto Vendido"
+            }
         }
     }
+
 }

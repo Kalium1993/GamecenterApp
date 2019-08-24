@@ -1,19 +1,22 @@
 package com.fundatec.gamecenter.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.fundatec.gamecenter.R
+import com.fundatec.gamecenter.ProdutosActivity
 import com.fundatec.gamecenter.jsonData.VendedoresData
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.ranking_vendedores_list.view.*
+import com.fundatec.gamecenter.VendedorActivity
+
 
 class RankingVendedoresAdapter(var context: Context, var vendedores: ArrayList<VendedoresData>)
     : androidx.recyclerview.widget.RecyclerView.Adapter<RankingVendedoresAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.ranking_vendedores_list, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(com.fundatec.gamecenter.R.layout.ranking_vendedores_list, parent, false)
         return ViewHolder(v, context)
     }
 
@@ -44,23 +47,24 @@ class RankingVendedoresAdapter(var context: Context, var vendedores: ArrayList<V
 
             itemView.nickVendedorR.text = item.nick
             itemView.notaVendedorR.text = "Nota: " + item.notaVendedor.toString()
-            Picasso.get().load(item.foto).placeholder(R.drawable.no_photo).fit().centerCrop().into(itemView.fotoVendedorR)
+            Picasso.get().load(item.foto).placeholder(com.fundatec.gamecenter.R.drawable.no_photo).fit().centerCrop()
+                .into(itemView.fotoVendedorR)
 
             if (i == 0) {
-                Picasso.get().load(R.drawable.top_badge).fit().centerCrop().into(itemView.topBadge)
+                Picasso.get().load(com.fundatec.gamecenter.R.drawable.top_badge).fit().centerCrop()
+                    .into(itemView.topBadge)
             } else {
-                Picasso.get().load(R.drawable.abc_cab_background_internal_bg).fit().centerCrop().into(itemView.topBadge)
+                Picasso.get().load(com.fundatec.gamecenter.R.drawable.abc_cab_background_internal_bg).fit().centerCrop()
+                    .into(itemView.topBadge)
             }
 
-//            itemView.setOnClickListener {
-//
-//                val i = Intent(Intent.ACTION_VIEW)
-//                i.data = Uri.parse(item.url)
-//                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                ctx.startActivity(i)
-//            }
+            itemView.setOnClickListener { v ->
+                val context = v.context
+                val intent = Intent(context, VendedorActivity::class.java)
+                intent.putExtra("nickVendedor", item.nick)
+                context.startActivity(intent)
+            }
         }
+
     }
-
-
 }

@@ -2,22 +2,10 @@ package com.fundatec.gamecenter
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity;
-import android.view.Menu
-import android.view.MenuItem
-import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.RequestQueue
-import com.android.volley.Response
-import com.android.volley.toolbox.Volley
-import com.fundatec.gamecenter.adapter.NewsAdapter
-import com.fundatec.gamecenter.jsonData.Article
-import com.fundatec.gamecenter.jsonData.NewsData
-import com.fundatec.gamecenter.request.GsonRequest
+import androidx.appcompat.app.AppCompatActivity
+import android.widget.ImageView
 
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,46 +16,29 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
+        openActivities()
     }
 
+    private fun openActivities() {
+        var openProdutos = findViewById<ImageView>(R.id.openProdutos)
 
+        openProdutos.setOnClickListener {
+            val intent = Intent(this, ProdutosActivity::class.java)
+            startActivity(intent)
+        }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
+        var openNews = findViewById<ImageView>(R.id.openNews)
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_home ->{
-                this.startActivity(Intent(this,MainActivity::class.java))
+        openNews.setOnClickListener {
+            val intent = Intent(this, NewsActivity::class.java)
+            startActivity(intent)
+        }
 
-                true
-            }
+        var openRankingVendedores = findViewById<ImageView>(R.id.openRankingVendedores)
 
-            R.id.action_news ->{
-                this.startActivity(Intent(this,NewsActivity::class.java))
-
-                true
-            }
-
-            R.id.action_produtos ->{
-                this.startActivity(Intent(this,ProdutosActivity::class.java))
-
-                true
-            }
-
-            R.id.action_rankingVendedores ->{
-                this.startActivity(Intent(this,RankingVendedoresActivity::class.java))
-
-                true
-            }
-
-            else -> super.onOptionsItemSelected(item)
+        openRankingVendedores.setOnClickListener {
+            val intent = Intent(this, RankingVendedoresActivity::class.java)
+            startActivity(intent)
         }
     }
 }
