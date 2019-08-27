@@ -1,9 +1,11 @@
 package com.fundatec.gamecenter.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.fundatec.gamecenter.ProdutoActivity
 import com.fundatec.gamecenter.R
 import com.fundatec.gamecenter.jsonData.ProdutosData
 import com.squareup.picasso.Picasso
@@ -49,9 +51,19 @@ class VendedorAdapter(var context: Context, var produtos: ArrayList<ProdutosData
                 itemView.descricaoProdutoVendedor.text = item.descricao
                 itemView.notaVenda.text = ""
                 itemView.vendido.text = "Produto á Venda!"
+                itemView.cmmComprador.text = ""
+
+                itemView.setOnClickListener { v ->
+                    val context = v.context
+                    val intent = Intent(context, ProdutoActivity::class.java)
+                    intent.putExtra("nickVendedor", item.nickVendedor)
+                    intent.putExtra("idProduto", item.id)
+                    context.startActivity(intent)
+                }
+
             } else {
-                itemView.descricaoProdutoVendedor.text = "Comentário do Comprador: \n" + item.cmmComprador
-                itemView.notaVenda.text = "Nota da Venda: " + item.notaVenda.toString()
+                itemView.descricaoProdutoVendedor.text = item.cmmComprador
+                itemView.notaVenda.text = "Nota da Venda: " + item.notaVenda
                 itemView.vendido.text = "Produto Vendido"
             }
         }

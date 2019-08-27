@@ -36,10 +36,8 @@ class NewsActivity : AppCompatActivity() {
 
         var request = GsonRequest(
             url, NewsData::class.java, null, Response.Listener { response ->
-                var adapter =
-                    NewsAdapter(baseContext, response.articles as ArrayList<Article>)
+                var adapter = NewsAdapter(baseContext, response.articles as ArrayList<Article>)
                 recyclerNews.adapter = adapter
-
             },
             Response.ErrorListener { error ->
                 Toast.makeText(baseContext, "deu ruim " + error.message, Toast.LENGTH_LONG).show()

@@ -46,7 +46,7 @@ class RankingVendedoresAdapter(var context: Context, var vendedores: ArrayList<V
         fun bindItems(item: VendedoresData, i: Int) {
 
             itemView.nickVendedorR.text = item.nick
-            itemView.notaVendedorR.text = "Nota: " + item.notaVendedor.toString()
+            itemView.notaVendedorR.text = "Nota: " + item.notaVendedor
             Picasso.get().load(item.foto).placeholder(com.fundatec.gamecenter.R.drawable.no_photo).fit().centerCrop()
                 .into(itemView.fotoVendedorR)
 
