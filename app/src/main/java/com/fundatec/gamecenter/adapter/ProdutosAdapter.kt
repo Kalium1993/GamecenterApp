@@ -10,8 +10,9 @@ import com.fundatec.gamecenter.R
 import com.fundatec.gamecenter.jsonData.ProdutosData
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.produtos_list.view.*
+import kotlinx.android.synthetic.main.produtos_vendedor.view.*
 
-class ProdutosAdapter(var context: Context, var produtos: ArrayList<ProdutosData>)
+class ProdutosAdapter(var context: Context, public var produtos: ArrayList<ProdutosData>)
     : androidx.recyclerview.widget.RecyclerView.Adapter<ProdutosAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -20,7 +21,7 @@ class ProdutosAdapter(var context: Context, var produtos: ArrayList<ProdutosData
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindItems(produtos[position])
+        holder.bindItems(produtos[position], position, produtos.size)
     }
 
 
@@ -42,11 +43,20 @@ class ProdutosAdapter(var context: Context, var produtos: ArrayList<ProdutosData
     //the class is hodling the list view
     class ViewHolder(itemView: View, var ctx: Context) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
-        fun bindItems(item: ProdutosData) {
+        fun bindItems(
+            item: ProdutosData,
+            i: Int,
+            size: Int
+        ) {
 
             itemView.nomeProduto.text = item.nome
             itemView.descricaoProduto.text = item.descricao
             Picasso.get().load(item.imagem).placeholder(R.drawable.no_img).fit().centerCrop().into(itemView.imagemProduto)
+
+
+            if (i == size) {
+                itemView.divider.visibility = View.GONE
+            }
 
             itemView.setOnClickListener { v ->
                 val context = v.context

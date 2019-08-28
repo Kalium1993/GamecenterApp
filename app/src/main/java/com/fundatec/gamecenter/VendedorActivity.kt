@@ -34,6 +34,9 @@ class VendedorActivity : AppCompatActivity() {
 
         queue = Volley.newRequestQueue(baseContext)
         recyclerProdutosVendedor.layoutManager = LinearLayoutManager(baseContext, RecyclerView.VERTICAL, false)
+
+
+
         readProdutosVendedor()
         readVendedor()
     }

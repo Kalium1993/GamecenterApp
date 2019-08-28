@@ -8,7 +8,7 @@
     <string name="title_activity_main">Home</string>
     <string name="title_activity_produtos">Produtos</string>
     <string name="title_activity_ranking_vendedores">Ranking de Vendedores</string>
-    <string name="title_activity_vendedor">VendedorActivity</string>
+    <string name="title_activity_vendedor">Vendedor</string>
     <string name="title_activity_news">Notícias</string>
-    <string name="title_activity_produto">ProdutoActivity</string>
+    <string name="title_activity_produto">Produto</string>
 </resources>
