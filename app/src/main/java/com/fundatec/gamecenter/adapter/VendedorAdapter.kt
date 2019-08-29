@@ -2,6 +2,7 @@ package com.fundatec.gamecenter.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +22,7 @@ class VendedorAdapter(var context: Context, var produtos: ArrayList<ProdutosData
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindItems(produtos[position])
+        holder.bindItems(produtos[position], position, produtos.size)
     }
 
 
@@ -43,11 +44,12 @@ class VendedorAdapter(var context: Context, var produtos: ArrayList<ProdutosData
     //the class is hodling the list view
     class ViewHolder(itemView: View, var ctx: Context) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
-        fun bindItems(item: ProdutosData) {
+        fun bindItems(item: ProdutosData, i: Int, size: Int) {
 
             itemView.nomeProdutoVendedor.text = item.nome
             Picasso.get().load(item.imagem).placeholder(R.drawable.no_img).fit().centerCrop().into(itemView.imagemProdutoVendedor)
             if (!item.vendido) {
+                itemView.vendido.setTextColor(Color.BLUE)
                 itemView.descricaoProdutoVendedor.text = item.descricao
                 itemView.notaVenda.text = ""
                 itemView.vendido.text = "Produto á Venda!"
@@ -62,10 +64,17 @@ class VendedorAdapter(var context: Context, var produtos: ArrayList<ProdutosData
                 }
 
             } else {
-                itemView.descricaoProdutoVendedor.text = item.cmmComprador
+                itemView.vendido.setTextColor(Color.RED)
+                var comentario = item.cmmComprador ?: "comprador não comentou"
+                itemView.descricaoProdutoVendedor.text = comentario
                 itemView.notaVenda.text = "Nota da Venda: " + item.notaVenda
-                itemView.vendido.text = "Produto Vendido"
+                itemView.vendido.text = "Produto Vendido!"
             }
+
+            if (i == (size - 1)) {
+                itemView.divider.visibility = View.GONE
+            }
+
         }
     }
 

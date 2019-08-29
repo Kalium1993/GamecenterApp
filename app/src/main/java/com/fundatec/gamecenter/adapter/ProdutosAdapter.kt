@@ -21,7 +21,7 @@ class ProdutosAdapter(var context: Context, public var produtos: ArrayList<Produ
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindItems(produtos[position], position, produtos.size)
+        holder.bindItems(produtos[position])
     }
 
 
@@ -43,20 +43,11 @@ class ProdutosAdapter(var context: Context, public var produtos: ArrayList<Produ
     //the class is hodling the list view
     class ViewHolder(itemView: View, var ctx: Context) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
-        fun bindItems(
-            item: ProdutosData,
-            i: Int,
-            size: Int
-        ) {
+        fun bindItems(item: ProdutosData) {
 
             itemView.nomeProduto.text = item.nome
             itemView.descricaoProduto.text = item.descricao
             Picasso.get().load(item.imagem).placeholder(R.drawable.no_img).fit().centerCrop().into(itemView.imagemProduto)
-
-
-            if (i == size) {
-                itemView.divider.visibility = View.GONE
-            }
 
             itemView.setOnClickListener { v ->
                 val context = v.context
