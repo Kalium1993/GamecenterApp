@@ -8,55 +8,104 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:showIn="@layout/activity_main"
         tools:context=".MainActivity">
+
     <ImageView
-            android:layout_width="119dp"
-            android:layout_height="114dp" app:srcCompat="@drawable/top_badge"
-            android:id="@+id/openRankingVendedores"
-            app:layout_constraintTop_toBottomOf="@+id/homeRankingVendedores"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"/>
+        android:id="@+id/openRankingVendedores"
+        android:layout_width="119dp"
+        android:layout_height="114dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/homeRankingVendedores"
+        app:srcCompat="@drawable/top_badge" />
+
     <ImageView
-            android:layout_width="119dp"
-            android:layout_height="114dp" app:srcCompat="@drawable/news"
-            android:id="@+id/openNews" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/homeNoticias" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"/>
+        android:id="@+id/openNews"
+        android:layout_width="119dp"
+        android:layout_height="114dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/homeNoticias"
+        app:srcCompat="@drawable/news" />
+
     <ImageView
-            android:layout_width="119dp"
-            android:layout_height="114dp" app:srcCompat="@drawable/products"
-            android:id="@+id/openProdutos" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/homeProdutos" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"/>
+        android:id="@+id/openProdutos"
+        android:layout_width="119dp"
+        android:layout_height="114dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/homeProdutos"
+        app:srcCompat="@drawable/products" />
+
     <TextView
-            android:text="Produtos à Venda"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/homeProdutos" android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" android:layout_marginRight="8dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp" android:layout_marginTop="24dp"/>
+        android:id="@+id/homeProdutos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:text="Produtos à Venda"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pesquisar" />
+
     <TextView
-            android:text="Notícias"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/homeNoticias" android:layout_marginTop="24dp"
-            app:layout_constraintTop_toBottomOf="@+id/openProdutos" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"/>
+        android:id="@+id/homeNoticias"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="24dp"
+        android:text="Notícias"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/openLogin" />
+
     <TextView
-            android:text="Ranking dos Vendedores"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/homeRankingVendedores" android:layout_marginTop="24dp"
-            app:layout_constraintTop_toBottomOf="@+id/openNews" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"/>
+        android:id="@+id/homeRankingVendedores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:text="Ranking dos Vendedores"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/openProdutos" />
+
+    <ImageView
+        android:id="@+id/openLogin"
+        android:layout_width="119dp"
+        android:layout_height="114dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/homeLogin"
+        app:srcCompat="@drawable/no_photo" />
+
+    <TextView
+        android:id="@+id/homeLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:text="Registrar/Logar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pesquisar" />
+
+    <SearchView
+        android:id="@+id/pesquisar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

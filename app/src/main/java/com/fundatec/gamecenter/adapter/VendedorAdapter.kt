@@ -10,7 +10,6 @@ import com.fundatec.gamecenter.ProdutoActivity
 import com.fundatec.gamecenter.R
 import com.fundatec.gamecenter.jsonData.ProdutosData
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.produtos_list.view.*
 import kotlinx.android.synthetic.main.produtos_vendedor.view.*
 
 class VendedorAdapter(var context: Context, var produtos: ArrayList<ProdutosData>)
@@ -51,7 +50,7 @@ class VendedorAdapter(var context: Context, var produtos: ArrayList<ProdutosData
             if (!item.vendido) {
                 itemView.vendido.setTextColor(Color.BLUE)
                 itemView.descricaoProdutoVendedor.text = item.descricao
-                itemView.notaVenda.text = ""
+                itemView.notaVendaProduto.text = ""
                 itemView.vendido.text = "Produto á Venda!"
                 itemView.cmmComprador.text = ""
 
@@ -67,7 +66,7 @@ class VendedorAdapter(var context: Context, var produtos: ArrayList<ProdutosData
                 itemView.vendido.setTextColor(Color.RED)
                 var comentario = item.cmmComprador ?: "comprador não comentou"
                 itemView.descricaoProdutoVendedor.text = comentario
-                itemView.notaVenda.text = "Nota da Venda: " + item.notaVenda
+                itemView.notaVendaProduto.text = "Nota da Venda: " + item.notaVenda
                 itemView.vendido.text = "Produto Vendido!"
             }
 

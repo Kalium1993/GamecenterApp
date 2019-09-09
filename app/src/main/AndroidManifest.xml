@@ -1,50 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.fundatec.gamecenter">
+    package="com.fundatec.gamecenter">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-            android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".UsuariosActivity"
+            android:label="@string/title_activity_usuarios"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ProdutoPostActivity"
+            android:label="@string/title_activity_produto_post"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".UsuarioActivity"
+            android:label="@string/title_activity_usuario"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ProdutoActivity"
+            android:label="@string/title_activity_produto"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NewsActivity"
+            android:label="@string/title_activity_news"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".VendedorActivity"
+            android:label="@string/title_activity_vendedor"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".RankingVendedoresActivity"
+            android:label="@string/title_activity_ranking_vendedores"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ProdutosActivity"
+            android:label="@string/title_activity_produtos"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MainActivity"
             android:label="@string/app_name"
-            android:roundIcon="@mipmap/ic_launcher_round"
-            android:usesCleartextTraffic="true"
-            android:supportsRtl="true"
-            android:theme="@style/AppTheme">
-        <activity
-                android:name=".ProdutoActivity"
-                android:label="@string/title_activity_produto"
-                android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity
-                android:name=".NewsActivity"
-                android:label="@string/title_activity_news"
-                android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity
-                android:name=".VendedorActivity"
-                android:label="@string/title_activity_vendedor"
-                android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity
-                android:name=".RankingVendedoresActivity"
-                android:label="@string/title_activity_ranking_vendedores"
-                android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity
-                android:name=".ProdutosActivity"
-                android:label="@string/title_activity_produtos"
-                android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity
-                android:name=".MainActivity"
-                android:label="@string/app_name"
-                android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>

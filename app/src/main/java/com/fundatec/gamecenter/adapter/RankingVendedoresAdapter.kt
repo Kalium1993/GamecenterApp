@@ -45,9 +45,9 @@ class RankingVendedoresAdapter(var context: Context, var vendedores: ArrayList<V
 
         fun bindItems(item: VendedoresData, i: Int) {
 
-            itemView.nickVendedorR.text = item.nick
+            itemView.nickVendedorR.text = item.usuario.nick
             itemView.notaVendedorR.text = "Nota: " + item.notaVendedor
-            Picasso.get().load(item.foto).placeholder(com.fundatec.gamecenter.R.drawable.no_photo).fit().centerCrop()
+            Picasso.get().load(item.usuario.foto).placeholder(com.fundatec.gamecenter.R.drawable.no_photo).fit().centerCrop()
                 .into(itemView.fotoVendedorR)
 
             if (i == 0) {
@@ -61,7 +61,7 @@ class RankingVendedoresAdapter(var context: Context, var vendedores: ArrayList<V
             itemView.setOnClickListener { v ->
                 val context = v.context
                 val intent = Intent(context, VendedorActivity::class.java)
-                intent.putExtra("nickVendedor", item.nick)
+                intent.putExtra("nickVendedor", item.usuario.nick)
                 context.startActivity(intent)
             }
         }

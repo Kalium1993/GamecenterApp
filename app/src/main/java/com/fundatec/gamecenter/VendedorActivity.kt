@@ -35,10 +35,16 @@ class VendedorActivity : AppCompatActivity() {
         queue = Volley.newRequestQueue(baseContext)
         recyclerProdutosVendedor.layoutManager = LinearLayoutManager(baseContext, RecyclerView.VERTICAL, false)
 
-
-
         readProdutosVendedor()
         readVendedor()
+
+        anunciarProduto.setOnClickListener { v ->
+            val context =  v.context
+            val intent = Intent(context, ProdutoPostActivity::class.java)
+            intent.putExtra("nickVendedor", vendedorNick.text.toString())
+            context.startActivity(intent)
+        }
+
     }
 
     private fun readVendedor() {
@@ -48,13 +54,13 @@ class VendedorActivity : AppCompatActivity() {
             url,
             VendedoresData::class.java,
             Response.Listener { vendedor ->
-                vendedorNick.text = vendedor.nick
-                Picasso.get().load(vendedor.foto).placeholder(R.drawable.no_photo).fit().centerCrop().into(fotoVendedor)
+                vendedorNick.text = vendedor.usuario.nick
+                Picasso.get().load(vendedor.usuario.foto).placeholder(R.drawable.no_photo).fit().centerCrop().into(fotoVendedor)
 
-                if (vendedor.nomeReal == null) {
+                if (vendedor.usuario.nomeReal == null) {
                     nomeVendedor.text = ""
                 } else {
-                    nomeVendedor.text = "(${vendedor.nomeReal})"
+                    nomeVendedor.text = "(${vendedor.usuario.nomeReal})"
                 }
 
                 notaVendedor.text = "Nota de Vendedor: " + vendedor.notaVendedor

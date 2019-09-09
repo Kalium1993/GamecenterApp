@@ -1,7 +1,6 @@
 package com.fundatec.gamecenter.jsonData
 import com.google.gson.annotations.SerializedName
 
-
 data class ProdutosData(
     @SerializedName("cmmComprador")
     val cmmComprador: String,
@@ -23,4 +22,24 @@ data class ProdutosData(
     val valor: Double,
     @SerializedName("vendido")
     val vendido: Boolean
+)
+
+data class ProdutoPost(
+    @SerializedName("descricao")
+    val descricao: String,
+    @SerializedName("frete")
+    val frete: Double,
+    @SerializedName("imagem")
+    val imagem: String,
+    @SerializedName("nome")
+    val nome: String,
+    @SerializedName("valor")
+    val valor: Double
+)
+
+data class ProdutoCompra(
+    @SerializedName("cmmComprador")
+    val cmmComprador: String,
+    @SerializedName("notaVenda")
+    val notaVenda: Double
 )

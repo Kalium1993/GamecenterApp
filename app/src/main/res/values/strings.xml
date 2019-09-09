@@ -11,4 +11,8 @@
     <string name="title_activity_vendedor">Vendedor</string>
     <string name="title_activity_news">Notícias</string>
     <string name="title_activity_produto">Produto</string>
+    <string name="title_activity_login">Registrar/Logar</string>
+    <string name="title_activity_usuario">Usuário</string>
+    <string name="title_activity_produto_post">Produto</string>
+    <string name="title_activity_usuarios">UsuariosActivity</string>
 </resources>

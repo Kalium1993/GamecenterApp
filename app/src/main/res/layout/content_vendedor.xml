@@ -10,13 +10,19 @@
         tools:context=".VendedorActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="8dp" android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" android:layout_marginRight="8dp" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent" android:id="@+id/recyclerProdutosVendedor"
-            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/fotoVendedor"/>
+        android:id="@+id/recyclerProdutosVendedor"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/anunciarProduto" />
     <ImageView
             android:layout_width="145dp"
             android:layout_height="145dp" app:srcCompat="@drawable/no_photo"
@@ -49,5 +55,15 @@
             android:layout_marginRight="8dp" android:layout_marginTop="24dp"
             app:layout_constraintStart_toEndOf="@+id/fotoVendedor" android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"/>
+
+    <Button
+        android:id="@+id/anunciarProduto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Anunciar Produto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fotoVendedor" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
