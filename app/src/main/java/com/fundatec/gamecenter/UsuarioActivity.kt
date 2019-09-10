@@ -39,9 +39,9 @@ class UsuarioActivity : AppCompatActivity() {
         ShowAtivarVendedor.setOnClickListener {
             findViewById<TextView>(R.id.msgCPF).visibility = View.VISIBLE
             findViewById<EditText>(R.id.cpfUsuario).visibility = View.VISIBLE
-            findViewById<Button>(R.id.AtivarVendedor).visibility = View.VISIBLE
+            findViewById<Button>(R.id.ativarVendedor).visibility = View.VISIBLE
 
-            editarUsuario.setOnClickListener { v ->
+            ativarVendedor.setOnClickListener { v ->
                 ativarPerfilVendedor()
                 val context =  v.context
                 val intent = Intent(context, VendedorActivity::class.java)
@@ -62,16 +62,19 @@ class UsuarioActivity : AppCompatActivity() {
             url,
             UsuariosData::class.java,
             Response.Listener { usuario ->
-                usuarioNick.text = usuario.nick
-                usuarioNome.text = usuario.nomeReal
+                usuarioNick.setText(usuario.nick)
+                usuarioNome.setText("(${usuario.nomeReal})")
                 Picasso.get().load(usuario.foto).placeholder(R.drawable.no_photo).fit().centerCrop().into(usuarioFoto)
-                usuarioEmail.text = "Email: " + usuario.email
-                usuarioTel.text = "Telefone: " + usuario.contato.telefone
-                usuarioEstado.text = "Estado: " + usuario.contato.estado
-                usuarioCid.text = "Cidade: " + usuario.contato.cidade
-                usuarioRua.text = "Rua: " + usuario.contato.rua
-                usuarioNum.text = "Numero: " + usuario.contato.numero
-                usuarioCEP.text = "CEP: " + usuario.contato.cep
+                usuarioEmail.setText("Email: " + usuario.email)
+
+                if(usuario.contato != null) {
+                    usuarioTel.setText("Telefone: " + usuario.contato.telefone)
+                    usuarioEstado.setText("Estado: " + usuario.contato.estado)
+                    usuarioCid.setText("Cidade: " + usuario.contato.cidade)
+                    usuarioRua.setText("Rua: " + usuario.contato.rua)
+                    usuarioNum.setText("Numero: " + usuario.contato.numero)
+                    usuarioCEP.setText("CEP: " + usuario.contato.cep)
+                }
             },
             Response.ErrorListener { e ->
                 Toast.makeText( baseContext, "" + e.message, Toast.LENGTH_LONG).show()
@@ -94,7 +97,7 @@ class UsuarioActivity : AppCompatActivity() {
     }
 
     private fun editar() {
-        Toast.makeText(baseContext, "função de editar em desenvolvimento", Toast.LENGTH_SHORT).show()
+        var url = "https://gamecenter-api.herokuapp.com/gamecenter/usuario/$nick/edit"
     }
 
 }

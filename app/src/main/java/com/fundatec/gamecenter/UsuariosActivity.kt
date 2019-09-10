@@ -34,7 +34,7 @@ class UsuariosActivity : AppCompatActivity() {
     }
 
     private fun readUsuario() {
-        var url = "https://gamecenter-api.herokuapp.com/pesquisar/usuarios/q=$query"
+        var url = "https://gamecenter-api.herokuapp.com/gamecenter/pesquisar/usuarios/q=$query"
 
         var request = GsonRequest(
             url, Array<UsuariosData>::class.java, null, Response.Listener { response ->

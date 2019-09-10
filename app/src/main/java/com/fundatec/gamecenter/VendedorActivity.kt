@@ -20,6 +20,11 @@ import kotlinx.android.synthetic.main.activity_vendedor.*
 import kotlinx.android.synthetic.main.content_vendedor.*
 
 class VendedorActivity : AppCompatActivity() {
+    override fun onResume() {
+        super.onResume()
+
+        readProdutosVendedor()
+    }
 
     private var nickVendedor: String = ""
 
@@ -35,7 +40,7 @@ class VendedorActivity : AppCompatActivity() {
         queue = Volley.newRequestQueue(baseContext)
         recyclerProdutosVendedor.layoutManager = LinearLayoutManager(baseContext, RecyclerView.VERTICAL, false)
 
-        readProdutosVendedor()
+
         readVendedor()
 
         anunciarProduto.setOnClickListener { v ->

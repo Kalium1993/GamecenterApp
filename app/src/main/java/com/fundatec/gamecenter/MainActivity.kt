@@ -2,12 +2,11 @@ package com.fundatec.gamecenter
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import androidx.appcompat.app.AppCompatActivity
-import android.widget.ImageView
 import android.widget.SearchView
+import androidx.appcompat.app.AppCompatActivity
 
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,41 +20,43 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun pesquisa() {
-        var pesquisar = findViewById<SearchView>(R.id.pesquisar)
 
-        pesquisar.setOnSearchClickListener {
-            val intent = Intent(this, UsuariosActivity::class.java)
-            intent.putExtra("query", pesquisar.query)
-            startActivity(intent)
-        }
+        pesquisar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                val intent = Intent(baseContext, UsuariosActivity::class.java)
+                intent.putExtra("query", query)
+                startActivity(intent)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                // do something when text changes
+                return false
+            }
+        })
+
+
+
     }
 
     private fun openActivities() {
-        var openProdutos = findViewById<ImageView>(R.id.openProdutos)
-
         openProdutos.setOnClickListener {
-            val intent = Intent(this, ProdutosActivity::class.java)
+            val intent = Intent(baseContext, ProdutosActivity::class.java)
             startActivity(intent)
         }
-
-        var openNews = findViewById<ImageView>(R.id.openNews)
 
         openNews.setOnClickListener {
-            val intent = Intent(this, NewsActivity::class.java)
+            val intent = Intent(baseContext, NewsActivity::class.java)
             startActivity(intent)
         }
-
-        var openRankingVendedores = findViewById<ImageView>(R.id.openRankingVendedores)
 
         openRankingVendedores.setOnClickListener {
-            val intent = Intent(this, RankingVendedoresActivity::class.java)
+            val intent = Intent(baseContext, RankingVendedoresActivity::class.java)
             startActivity(intent)
         }
 
-        var openLogin = findViewById<ImageView>(R.id.openLogin)
-
         openLogin.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
+            val intent = Intent(baseContext, LoginActivity::class.java)
             startActivity(intent)
         }
     }
