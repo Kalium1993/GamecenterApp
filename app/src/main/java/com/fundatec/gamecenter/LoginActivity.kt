@@ -28,12 +28,8 @@ class LoginActivity : AppCompatActivity() {
 
         queue = Volley.newRequestQueue(baseContext)
 
-        registrar.setOnClickListener { v ->
+        registrar.setOnClickListener {
             registrar()
-            val context =  v.context
-            val intent = Intent(context, UsuarioActivity::class.java)
-            intent.putExtra("nick", registrarNick.text.toString())
-            context.startActivity(intent)
         }
 
         logar.setOnClickListener { v ->
@@ -51,7 +47,9 @@ class LoginActivity : AppCompatActivity() {
         var post = Gson().toJson(usuario)
 
         var request = GsonJsonRequest(Request.Method.POST, url, UsuarioRegistrar::class.java, post, Response.Listener { response ->
-            finish()
+            val intent = Intent(baseContext, UsuarioActivity::class.java)
+            intent.putExtra("nick", registrarNick.text.toString())
+            startActivity(intent)
         }, Response.ErrorListener { e ->
             Toast.makeText( baseContext, "" + e.message, Toast.LENGTH_LONG).show()
         })

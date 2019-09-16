@@ -35,11 +35,11 @@ data class UsuarioEditar(
     @SerializedName("email")
     val email: String,
     @SerializedName("foto")
-    val foto: String,
+    val foto: String?,
     @SerializedName("nick")
     val nick: String,
     @SerializedName("nomeReal")
-    val nomeReal: String,
+    val nomeReal: String?,
     @SerializedName("senha")
     val senha: String
 )

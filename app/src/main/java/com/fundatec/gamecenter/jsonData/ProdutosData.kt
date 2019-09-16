@@ -30,7 +30,7 @@ data class ProdutoPost(
     @SerializedName("frete")
     val frete: Double,
     @SerializedName("imagem")
-    val imagem: String,
+    val imagem: String?,
     @SerializedName("nome")
     val nome: String,
     @SerializedName("valor")

@@ -14,5 +14,5 @@
     <string name="title_activity_login">Registrar/Logar</string>
     <string name="title_activity_usuario">Usuário</string>
     <string name="title_activity_produto_post">Produto</string>
-    <string name="title_activity_usuarios">UsuariosActivity</string>
+    <string name="title_activity_usuarios">Usuários</string>
 </resources>

@@ -46,7 +46,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:gravity="center"
-                android:text="Nome Real:"
+                android:hint="(Nome Real)"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/usuarioFoto"
@@ -58,11 +58,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:gravity="center"
-                android:text="Nick:"
+                android:hint="Nick"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -77,105 +77,90 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:text="Endereço/Contato"
+                android:textColor="#000000"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/usuarioFoto" />
+                app:layout_constraintTop_toBottomOf="@+id/urlFoto" />
 
             <EditText
                 android:id="@+id/usuarioEmail"
-                android:layout_width="0dp"
+                android:layout_width="285dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:text="Email: "
+                android:inputType="textEmailAddress"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/endContato" />
 
             <EditText
                 android:id="@+id/usuarioRua"
-                android:layout_width="0dp"
+                android:layout_width="285dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
-                android:text="Rua: "
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/usuarioCid" />
 
             <EditText
                 android:id="@+id/usuarioEstado"
-                android:layout_width="0dp"
+                android:layout_width="285dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:text="Estado: "
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/usuarioTel" />
 
             <EditText
                 android:id="@+id/usuarioCid"
-                android:layout_width="0dp"
+                android:layout_width="285dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
-                android:text="Cidade: "
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/usuarioEstado" />
 
             <EditText
                 android:id="@+id/usuarioTel"
-                android:layout_width="0dp"
+                android:layout_width="285dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:text="Telefone: "
+                android:inputType="phone"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/usuarioEmail" />
 
             <EditText
                 android:id="@+id/usuarioNum"
-                android:layout_width="0dp"
+                android:layout_width="285dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
-                android:text="Número: "
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:inputType="number"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/usuarioRua" />
 
             <EditText
                 android:id="@+id/usuarioCEP"
-                android:layout_width="0dp"
+                android:layout_width="285dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
-                android:text="CEP: "
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:inputType="number"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/usuarioNum" />
 
             <Button
@@ -207,7 +192,7 @@
                 android:layout_marginTop="8dp"
                 android:gravity="center"
                 android:text="Informe seu CPF para poder ativar um perfil de vendedor"
-                android:visibility="invisible"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ShowAtivarVendedor" />
@@ -223,7 +208,8 @@
                 android:layout_marginRight="8dp"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:visibility="invisible"
+                android:textSize="14sp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/msgCPF" />
@@ -234,10 +220,136 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Ativar"
-                android:visibility="invisible"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cpfUsuario" />
+
+            <EditText
+                android:id="@+id/usuarioSenha"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:ems="10"
+                android:gravity="center"
+                android:inputType="textPassword"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/usuarioFoto"
+                app:layout_constraintTop_toBottomOf="@+id/usuarioNome" />
+
+            <EditText
+                android:id="@+id/urlFoto"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:ems="10"
+                android:hint="URL da Imagem"
+                android:inputType="textPersonName"
+                android:textSize="14sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/usuarioFoto" />
+
+            <TextView
+                android:id="@+id/txtTel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="18dp"
+                android:layout_span="1"
+                android:scrollbarSize="4dp"
+                android:text="Telefone: "
+                android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@+id/usuarioTel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/usuarioEmail" />
+
+            <TextView
+                android:id="@+id/txtEmail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="18dp"
+                android:text="Email: "
+                android:textColor="#000000"
+                app:layout_constraintEnd_toStartOf="@+id/usuarioEmail"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/endContato" />
+
+            <TextView
+                android:id="@+id/txtEstado"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="18dp"
+                android:layout_span="1"
+                android:text="Estado: "
+                app:layout_constraintEnd_toStartOf="@+id/usuarioEstado"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/usuarioTel" />
+
+            <TextView
+                android:id="@+id/txtRua"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="18dp"
+                android:text="Rua: "
+                app:layout_constraintEnd_toStartOf="@+id/usuarioRua"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/usuarioCid" />
+
+            <TextView
+                android:id="@+id/txtCEP"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="18dp"
+                android:text="CEP: "
+                app:layout_constraintEnd_toStartOf="@+id/usuarioCEP"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/usuarioNum" />
+
+            <TextView
+                android:id="@+id/txtNum"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="18dp"
+                android:layout_span="1"
+                android:text="Número: "
+                app:layout_constraintEnd_toStartOf="@+id/usuarioNum"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/usuarioRua" />
+
+            <TextView
+                android:id="@+id/txtCidade"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="18dp"
+                android:layout_span="1"
+                android:text="Cidade: "
+                app:layout_constraintEnd_toStartOf="@+id/usuarioCid"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/usuarioEstado" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -41,7 +41,7 @@ class RankingVendedoresActivity : AppCompatActivity() {
 
             },
             Response.ErrorListener { error ->
-                Toast.makeText(baseContext, "deu ruim " + error.message, Toast.LENGTH_LONG).show()
+                Toast.makeText(baseContext, "" + error.message, Toast.LENGTH_LONG).show()
             }
         )
         queue?.add(request)

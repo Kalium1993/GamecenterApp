@@ -31,23 +31,25 @@ class ProdutoPostActivity : AppCompatActivity() {
 
         postProduto.setOnClickListener { v ->
             anunciar()
-            val context =  v.context
-            val intent = Intent(context, VendedorActivity::class.java)
-            intent.putExtra("nickVendedor", nickVendedor)
-            context.startActivity(intent)
         }
-
     }
 
     private fun anunciar() {
         var url = "https://gamecenter-api.herokuapp.com/gamecenter/$nickVendedor/produto/post"
         var frete = postFrete.text.toString()
         var valor = postValor.text.toString()
-        var produto = ProdutoPost(postDescricao.text.toString(), frete.toDouble(), postImagem.text.toString(), postNome.text.toString(), valor.toDouble())
+
+        var imagem: String ?= null
+        if (postImagem.text.toString().trim().isNotEmpty())
+            imagem = postImagem.text.toString()
+        
+        var produto = ProdutoPost(postDescricao.text.toString(), frete.toDouble(), imagem, postNome.text.toString(), valor.toDouble())
         var post = Gson().toJson(produto)
 
         var request = GsonJsonRequest(Request.Method.POST, url, ProdutoPost::class.java, post, Response.Listener { response ->
-            finish()
+            val intent = Intent(baseContext, VendedorActivity::class.java)
+            intent.putExtra("nickVendedor", nickVendedor)
+            startActivity(intent)
         }, Response.ErrorListener { e ->
             Toast.makeText( baseContext, "" + e.message, Toast.LENGTH_LONG).show()
         })

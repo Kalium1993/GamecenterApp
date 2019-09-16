@@ -20,11 +20,6 @@ import kotlinx.android.synthetic.main.activity_vendedor.*
 import kotlinx.android.synthetic.main.content_vendedor.*
 
 class VendedorActivity : AppCompatActivity() {
-    override fun onResume() {
-        super.onResume()
-
-        readProdutosVendedor()
-    }
 
     private var nickVendedor: String = ""
 
@@ -42,6 +37,7 @@ class VendedorActivity : AppCompatActivity() {
 
 
         readVendedor()
+        readProdutosVendedor()
 
         anunciarProduto.setOnClickListener { v ->
             val context =  v.context
@@ -61,6 +57,8 @@ class VendedorActivity : AppCompatActivity() {
             Response.Listener { vendedor ->
                 vendedorNick.text = vendedor.usuario.nick
                 Picasso.get().load(vendedor.usuario.foto).placeholder(R.drawable.no_photo).fit().centerCrop().into(fotoVendedor)
+
+
 
                 if (vendedor.usuario.nomeReal == null) {
                     nomeVendedor.text = ""
@@ -88,7 +86,7 @@ class VendedorActivity : AppCompatActivity() {
 
             },
             Response.ErrorListener { error ->
-                Toast.makeText(baseContext, "deu ruim " + error.message, Toast.LENGTH_LONG).show()
+                Toast.makeText(baseContext, "" + error.message, Toast.LENGTH_LONG).show()
             }
         )
         queue?.add(request)

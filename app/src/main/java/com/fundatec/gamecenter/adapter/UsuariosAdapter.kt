@@ -51,7 +51,7 @@ class UsuariosAdapter (var context: Context, var usuarios: ArrayList<UsuariosDat
             else
                 itemView.nomeUsuarioQ.text = "(${item.nomeReal})"
 
-            Picasso.get().load(item.foto).placeholder(R.drawable.no_img).fit().centerCrop().into(itemView.fotoUsuarioQ)
+            Picasso.get().load(item.foto).placeholder(R.drawable.no_photo).fit().centerCrop().into(itemView.fotoUsuarioQ)
 
             itemView.setOnClickListener { v ->
                 val context = v.context
