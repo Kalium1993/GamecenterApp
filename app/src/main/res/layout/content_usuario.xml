@@ -167,9 +167,10 @@
                 android:id="@+id/editarUsuario"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
                 android:layout_marginTop="8dp"
                 android:text="Salvar"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/usuarioCEP" />
 
@@ -350,6 +351,17 @@
                 app:layout_constraintEnd_toStartOf="@+id/usuarioCid"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/usuarioEstado" />
+
+            <Button
+                android:id="@+id/deletarUsuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:text="Excluir Perfil"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/usuarioCEP" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -46,7 +46,7 @@ class UsuariosAdapter (var context: Context, var usuarios: ArrayList<UsuariosDat
 
             itemView.nickUsuarioQ.text = item.nick
 
-            if (item.nomeReal == null || item.nomeReal.isEmpty())
+            if (item.nomeReal == null || item.nomeReal!!.isEmpty())
                 itemView.nomeUsuarioQ.text = ""
             else
                 itemView.nomeUsuarioQ.text = "(${item.nomeReal})"

@@ -1,5 +1,6 @@
 package com.fundatec.gamecenter
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -7,15 +8,13 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
-import com.fundatec.gamecenter.jsonData.Contato
-import com.fundatec.gamecenter.jsonData.UsuarioEditar
-import com.fundatec.gamecenter.jsonData.UsuariosData
-import com.fundatec.gamecenter.jsonData.VendedorAtivar
+import com.fundatec.gamecenter.jsonData.*
 import com.fundatec.gamecenter.request.GsonJsonClassRequest
 import com.fundatec.gamecenter.request.GsonJsonRequest
 import com.google.gson.Gson
@@ -30,11 +29,6 @@ class UsuarioActivity : AppCompatActivity() {
     private var queue : RequestQueue? = null
     private var idUsuario: String = ""
 
-//    override fun onResume() {
-//        super.onResume()
-//
-//
-//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +51,19 @@ class UsuarioActivity : AppCompatActivity() {
 
         editarUsuario.setOnClickListener {
             editar()
+        }
+
+        deletarUsuario.setOnClickListener {
+            val alerta = AlertDialog.Builder(this)
+            alerta.setMessage("Ao excluir seu perfil, o seu perfil de vendedor será desativado e seus produtos à venda também serão excluídos, deseja continuar?")
+            alerta.setCancelable(false)
+            alerta.setNegativeButton("Cancelar") { dialog, which ->
+
+                }
+            alerta.setPositiveButton("Confirmar"){ dialog, which ->
+                    deletar()
+                }
+            alerta.show()
         }
 
         usuarioFoto.setOnClickListener {
@@ -83,18 +90,18 @@ class UsuarioActivity : AppCompatActivity() {
                 usuarioSenha.setText(usuario.senha)
 
                 if(usuario.contato != null) {
-                    usuarioTel.setText(usuario.contato.telefone)
-                    usuarioEstado.setText(usuario.contato.estado)
-                    usuarioCid.setText(usuario.contato.cidade)
-                    usuarioRua.setText(usuario.contato.rua)
-                    usuarioNum.setText(usuario.contato.numero)
-                    usuarioCEP.setText(usuario.contato.cep)
+                    usuarioTel.setText(usuario.contato!!.telefone)
+                    usuarioEstado.setText(usuario.contato!!.estado)
+                    usuarioCid.setText(usuario.contato!!.cidade)
+                    usuarioRua.setText(usuario.contato!!.rua)
+                    usuarioNum.setText(usuario.contato!!.numero)
+                    usuarioCEP.setText(usuario.contato!!.cep)
                 }
 
-                if (usuario.vendedor)
+                if (usuario.vendedor!!)
                     ShowAtivarVendedor.visibility = View.GONE
 
-                idUsuario = usuario.id
+                idUsuario = usuario.id!!
 
             },
             Response.ErrorListener { e ->
@@ -131,13 +138,30 @@ class UsuarioActivity : AppCompatActivity() {
             nomeReal = usuarioNome.text.toString()
 
         var usuario = UsuarioEditar(contato, usuarioEmail.text.toString(), foto, usuarioNick.text.toString(), nomeReal, usuarioSenha.text.toString())
-        var post = Gson().toJson(usuario)
+        var put = Gson().toJson(usuario)
 
-        var request = GsonJsonRequest(Request.Method.PUT, url, UsuarioEditar::class.java, post, Response.Listener {
+        var request = GsonJsonRequest(Request.Method.PUT, url, UsuarioEditar::class.java, put, Response.Listener {
             val intent = intent
             finish()
             intent.putExtra("nick", usuarioNick.text.toString())
             startActivity(intent)
+        }, Response.ErrorListener { e ->
+            Toast.makeText( baseContext, "" + e.message, Toast.LENGTH_LONG).show()
+        })
+
+        queue?.add(request)
+    }
+
+    private fun deletar() {
+        var url = "https://gamecenter-api.herokuapp.com/gamecenter/usuario/$idUsuario/delete"
+
+        var usuario = UsuarioDeletar(idUsuario)
+        var delete = Gson().toJson(usuario)
+
+        var request = GsonJsonRequest(Request.Method.DELETE, url, UsuarioEditar::class.java, delete, Response.Listener { v ->
+            val intent = Intent(baseContext, MainActivity::class.java)
+            startActivity(intent)
+            Toast.makeText(baseContext, "Perfil Excluído", Toast.LENGTH_SHORT).show()
         }, Response.ErrorListener { e ->
             Toast.makeText( baseContext, "" + e.message, Toast.LENGTH_LONG).show()
         })

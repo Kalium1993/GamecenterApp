@@ -1,24 +1,33 @@
 package com.fundatec.gamecenter.jsonData
 import com.google.gson.annotations.SerializedName
+import java.lang.reflect.Constructor
 
 data class UsuariosData(
-    @SerializedName("contato")
-    val contato: Contato,
-    @SerializedName("email")
-    val email: String,
-    @SerializedName("foto")
-    val foto: String,
-    @SerializedName("_id")
-    val id: String,
     @SerializedName("nick")
-    val nick: String,
+    val nick: String
+
+) {
+    @SerializedName("contato")
+    var contato: Contato? = null
+    @SerializedName("email")
+    var email: String? = null
+    @SerializedName("foto")
+    var foto: String? = null
+    @SerializedName("_id")
+    var id: String? = null
     @SerializedName("nomeReal")
-    val nomeReal: String,
+    var nomeReal: String? = null
     @SerializedName("senha")
-    val senha: String,
+    var senha: String? = null
     @SerializedName("vendedor")
-    val vendedor: Boolean
-)
+    var vendedor: Boolean? = null
+    constructor() : this( "" )
+
+    constructor( email : String, nick: String, senha: String) : this( nick ){
+        this.senha = senha
+        this.email = email
+    }
+}
 
 data class UsuarioRegistrar(
     @SerializedName("email")
@@ -44,17 +53,22 @@ data class UsuarioEditar(
     val senha: String
 )
 
+data class UsuarioDeletar(
+    @SerializedName("_id")
+    val id: String
+)
+
 data class Contato(
     @SerializedName("cep")
-    val cep: String,
+    var cep: String,
     @SerializedName("cidade")
-    val cidade: String,
+    var cidade: String,
     @SerializedName("estado")
-    val estado: String,
+    var estado: String,
     @SerializedName("numero")
-    val numero: String,
+    var numero: String,
     @SerializedName("rua")
-    val rua: String,
+    var rua: String,
     @SerializedName("telefone")
-    val telefone: String
+    var telefone: String
 )

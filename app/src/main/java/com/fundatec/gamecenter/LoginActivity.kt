@@ -43,10 +43,10 @@ class LoginActivity : AppCompatActivity() {
 
     private fun registrar() {
         var url = "https://gamecenter-api.herokuapp.com/gamecenter/usuario/registrar"
-        var usuario = UsuarioRegistrar(registrarEmail.text.toString(), registrarNick.text.toString(), registrarSenha.text.toString())
+        var usuario = UsuariosData(registrarEmail.text.toString(), registrarNick.text.toString(), registrarSenha.text.toString())
         var post = Gson().toJson(usuario)
 
-        var request = GsonJsonRequest(Request.Method.POST, url, UsuarioRegistrar::class.java, post, Response.Listener { response ->
+        var request = GsonJsonRequest(Request.Method.POST, url, UsuariosData::class.java, post, Response.Listener {
             val intent = Intent(baseContext, UsuarioActivity::class.java)
             intent.putExtra("nick", registrarNick.text.toString())
             startActivity(intent)
