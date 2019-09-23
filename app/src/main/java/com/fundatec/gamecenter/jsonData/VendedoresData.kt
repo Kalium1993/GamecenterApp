@@ -3,35 +3,33 @@ import com.google.gson.annotations.SerializedName
 
 data class VendedoresData(
     @SerializedName("cpf")
-    val cpf: String,
-    @SerializedName("_id")
-    val id: String,
-    @SerializedName("notaVendedor")
-    val notaVendedor: Double,
-    @SerializedName("usuario")
-    val usuario: Usuario
-)
-
-data class VendedorAtivar(
-    @SerializedName("cpf")
     val cpf: String
-)
+) {
+    @SerializedName("_id")
+    var id: String? = null
+    @SerializedName("notaVendedor")
+    var notaVendedor: Double? = null
+    @SerializedName("usuario")
+    var usuario: Usuario? = null
+    constructor() : this( "" )
+
+}
 
 data class Usuario(
     @SerializedName("contato")
-    val contato: Contato,
+    var contato: Contato,
     @SerializedName("email")
-    val email: String,
+    var email: String,
     @SerializedName("foto")
-    val foto: String,
+    var foto: String,
     @SerializedName("_id")
-    val id: String,
+    var id: String,
     @SerializedName("nick")
-    val nick: String,
+    var nick: String,
     @SerializedName("nomeReal")
-    val nomeReal: String,
+    var nomeReal: String,
     @SerializedName("senha")
-    val senha: String,
+    var senha: String,
     @SerializedName("vendedor")
-    val vendedor: Boolean
+    var vendedor: Boolean
 )

@@ -55,15 +55,15 @@ class VendedorActivity : AppCompatActivity() {
             url,
             VendedoresData::class.java,
             Response.Listener { vendedor ->
-                vendedorNick.text = vendedor.usuario.nick
-                Picasso.get().load(vendedor.usuario.foto).placeholder(R.drawable.no_photo).fit().centerCrop().into(fotoVendedor)
+                vendedorNick.text = vendedor.usuario!!.nick
+                Picasso.get().load(vendedor.usuario!!.foto).placeholder(R.drawable.no_photo).fit().centerCrop().into(fotoVendedor)
 
 
 
-                if (vendedor.usuario.nomeReal == null) {
+                if (vendedor.usuario!!.nomeReal == null) {
                     nomeVendedor.text = ""
                 } else {
-                    nomeVendedor.text = "(${vendedor.usuario.nomeReal})"
+                    nomeVendedor.text = "(${vendedor.usuario!!.nomeReal})"
                 }
 
                 notaVendedor.text = "Nota de Vendedor: " + vendedor.notaVendedor

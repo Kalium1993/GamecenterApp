@@ -47,7 +47,7 @@ class VendedorAdapter(var context: Context, var produtos: ArrayList<ProdutosData
 
             itemView.nomeProdutoVendedor.text = item.nome
             Picasso.get().load(item.imagem).placeholder(R.drawable.no_img).fit().centerCrop().into(itemView.imagemProdutoVendedor)
-            if (!item.vendido) {
+            if (!item.vendido!!) {
                 itemView.vendido.setTextColor(Color.BLUE)
                 itemView.descricaoProdutoVendedor.text = item.descricao
                 itemView.notaVendaProduto.text = ""

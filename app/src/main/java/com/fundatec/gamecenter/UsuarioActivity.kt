@@ -1,12 +1,8 @@
 package com.fundatec.gamecenter
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -98,9 +94,21 @@ class UsuarioActivity : AppCompatActivity() {
                     usuarioCEP.setText(usuario.contato!!.cep)
                 }
 
-                if (usuario.vendedor!!)
-                    ShowAtivarVendedor.visibility = View.GONE
+                if (usuario.vendedor!!) {
+                    ShowAtivarVendedor.text = "Desativar perfil de vendedor"
+                    ShowAtivarVendedor.setOnClickListener {
+                        val alerta = AlertDialog.Builder(this)
+                        alerta.setMessage("Ao desativar seu perfil de vendedor, todos seus produtos à venda também serão excluídos, deseja continuar?")
+                        alerta.setCancelable(false)
+                        alerta.setNegativeButton("Cancelar") { dialog, which ->
 
+                        }
+                        alerta.setPositiveButton("Confirmar"){ dialog, which ->
+                            desativarPerfilVendedor()
+                        }
+                        alerta.show()
+                    }
+                }
                 idUsuario = usuario.id!!
 
             },
@@ -113,13 +121,29 @@ class UsuarioActivity : AppCompatActivity() {
 
     private fun ativarPerfilVendedor() {
         var url = "https://gamecenter-api.herokuapp.com/gamecenter/$nick/vendedor/ativar"
-        var vendedor = VendedorAtivar(cpfUsuario.text.toString())
+        var vendedor = VendedoresData(cpfUsuario.text.toString())
         var post = Gson().toJson(vendedor)
 
-        var request = GsonJsonRequest(Request.Method.POST, url, VendedorAtivar::class.java, post, Response.Listener { response ->
+        var request = GsonJsonRequest(Request.Method.POST, url, VendedoresData::class.java, post, Response.Listener { response ->
             val intent = Intent(baseContext, VendedorActivity::class.java)
             intent.putExtra("nickVendedor", usuarioNick.text.toString())
             startActivity(intent)
+        }, Response.ErrorListener { e ->
+            Toast.makeText( baseContext, "" + e.message, Toast.LENGTH_LONG).show()
+        })
+        queue?.add(request)
+    }
+
+    private fun desativarPerfilVendedor() {
+        var url = "https://gamecenter-api.herokuapp.com/gamecenter/vendedor/$nick/delete"
+        var vendedor = VendedoresData()
+        var delete = Gson().toJson(vendedor)
+
+        var request = GsonJsonRequest(Request.Method.DELETE, url, VendedoresData::class.java, delete, Response.Listener { response ->
+            val intent = Intent(baseContext, UsuarioActivity::class.java)
+            intent.putExtra("nick", usuarioNick.text.toString())
+            startActivity(intent)
+            Toast.makeText(baseContext, "Perfil de vendedor desativado", Toast.LENGTH_SHORT).show()
         }, Response.ErrorListener { e ->
             Toast.makeText( baseContext, "" + e.message, Toast.LENGTH_LONG).show()
         })
@@ -137,12 +161,11 @@ class UsuarioActivity : AppCompatActivity() {
         if (usuarioNome.text.toString().trim().isNotEmpty())
             nomeReal = usuarioNome.text.toString()
 
-        var usuario = UsuarioEditar(contato, usuarioEmail.text.toString(), foto, usuarioNick.text.toString(), nomeReal, usuarioSenha.text.toString())
+        var usuario = UsuariosData(contato, usuarioEmail.text.toString(), foto, usuarioNick.text.toString(), nomeReal, usuarioSenha.text.toString())
         var put = Gson().toJson(usuario)
 
-        var request = GsonJsonRequest(Request.Method.PUT, url, UsuarioEditar::class.java, put, Response.Listener {
-            val intent = intent
-            finish()
+        var request = GsonJsonRequest(Request.Method.PUT, url, UsuariosData::class.java, put, Response.Listener {
+            val intent = Intent(baseContext, UsuarioActivity::class.java)
             intent.putExtra("nick", usuarioNick.text.toString())
             startActivity(intent)
         }, Response.ErrorListener { e ->
@@ -155,10 +178,10 @@ class UsuarioActivity : AppCompatActivity() {
     private fun deletar() {
         var url = "https://gamecenter-api.herokuapp.com/gamecenter/usuario/$idUsuario/delete"
 
-        var usuario = UsuarioDeletar(idUsuario)
+        var usuario = UsuariosData()
         var delete = Gson().toJson(usuario)
 
-        var request = GsonJsonRequest(Request.Method.DELETE, url, UsuarioEditar::class.java, delete, Response.Listener { v ->
+        var request = GsonJsonRequest(Request.Method.DELETE, url, UsuariosData::class.java, delete, Response.Listener { v ->
             val intent = Intent(baseContext, MainActivity::class.java)
             startActivity(intent)
             Toast.makeText(baseContext, "Perfil Excluído", Toast.LENGTH_SHORT).show()

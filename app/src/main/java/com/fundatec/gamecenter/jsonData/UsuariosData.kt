@@ -27,36 +27,15 @@ data class UsuariosData(
         this.senha = senha
         this.email = email
     }
+
+    constructor( contato: Contato, email: String, foto: String?, nick: String, nomeReal: String?, senha: String) : this( nick ){
+        this.contato = contato
+        this.foto = foto
+        this.nomeReal = nomeReal
+        this.senha = senha
+        this.email = email
+    }
 }
-
-data class UsuarioRegistrar(
-    @SerializedName("email")
-    val email: String,
-    @SerializedName("nick")
-    val nick: String,
-    @SerializedName("senha")
-    val senha: String
-)
-
-data class UsuarioEditar(
-    @SerializedName("contato")
-    val contato: Contato,
-    @SerializedName("email")
-    val email: String,
-    @SerializedName("foto")
-    val foto: String?,
-    @SerializedName("nick")
-    val nick: String,
-    @SerializedName("nomeReal")
-    val nomeReal: String?,
-    @SerializedName("senha")
-    val senha: String
-)
-
-data class UsuarioDeletar(
-    @SerializedName("_id")
-    val id: String
-)
 
 data class Contato(
     @SerializedName("cep")

@@ -3,13 +3,12 @@ package com.fundatec.gamecenter
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
-import com.fundatec.gamecenter.jsonData.ProdutoPost
+import com.fundatec.gamecenter.jsonData.ProdutosData
 import com.fundatec.gamecenter.request.GsonJsonRequest
 import com.google.gson.Gson
 
@@ -43,10 +42,10 @@ class ProdutoPostActivity : AppCompatActivity() {
         if (postImagem.text.toString().trim().isNotEmpty())
             imagem = postImagem.text.toString()
         
-        var produto = ProdutoPost(postDescricao.text.toString(), frete.toDouble(), imagem, postNome.text.toString(), valor.toDouble())
+        var produto = ProdutosData(postDescricao.text.toString(), frete.toDouble(), imagem, postNome.text.toString(), valor.toDouble())
         var post = Gson().toJson(produto)
 
-        var request = GsonJsonRequest(Request.Method.POST, url, ProdutoPost::class.java, post, Response.Listener { response ->
+        var request = GsonJsonRequest(Request.Method.POST, url, ProdutosData::class.java, post, Response.Listener { response ->
             val intent = Intent(baseContext, VendedorActivity::class.java)
             intent.putExtra("nickVendedor", nickVendedor)
             startActivity(intent)

@@ -2,44 +2,39 @@ package com.fundatec.gamecenter.jsonData
 import com.google.gson.annotations.SerializedName
 
 data class ProdutosData(
+    @SerializedName("nome")
+    val nome: String
+
+) {
     @SerializedName("cmmComprador")
-    val cmmComprador: String,
+    var cmmComprador: String? = null
     @SerializedName("descricao")
-    val descricao: String,
+    var descricao: String? = null
     @SerializedName("frete")
-    val frete: Double,
+    var frete: Double? = null
     @SerializedName("_id")
-    val id: String,
+    var id: String? = null
     @SerializedName("imagem")
-    val imagem: String,
+    var imagem: String? = null
     @SerializedName("nickVendedor")
-    val nickVendedor: String,
-    @SerializedName("nome")
-    val nome: String,
+    var nickVendedor: String? = null
     @SerializedName("notaVenda")
-    val notaVenda: Double,
+    var notaVenda: Double? = null
     @SerializedName("valor")
-    val valor: Double,
+    var valor: Double? = null
     @SerializedName("vendido")
-    val vendido: Boolean
-)
+    var vendido: Boolean? = null
+    constructor() : this( "" )
 
-data class ProdutoPost(
-    @SerializedName("descricao")
-    val descricao: String,
-    @SerializedName("frete")
-    val frete: Double,
-    @SerializedName("imagem")
-    val imagem: String?,
-    @SerializedName("nome")
-    val nome: String,
-    @SerializedName("valor")
-    val valor: Double
-)
+    constructor(descricao: String, frete: Double, imagem: String?, nome: String, valor: Double) : this(nome) {
+        this.descricao = descricao
+        this.frete = frete
+        this.imagem = imagem
+        this.valor = valor
+    }
 
-data class ProdutoCompra(
-    @SerializedName("cmmComprador")
-    val cmmComprador: String,
-    @SerializedName("notaVenda")
-    val notaVenda: Double
-)
+    constructor(cmmComprador: String, notaVenda: Double) : this ("") {
+        this.cmmComprador = cmmComprador
+        this.notaVenda = notaVenda
+    }
+}

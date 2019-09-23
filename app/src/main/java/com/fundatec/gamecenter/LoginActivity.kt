@@ -8,8 +8,6 @@ import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
-import com.fundatec.gamecenter.jsonData.Contato
-import com.fundatec.gamecenter.jsonData.UsuarioRegistrar
 import com.fundatec.gamecenter.jsonData.UsuariosData
 import com.fundatec.gamecenter.request.GsonJsonRequest
 import com.google.gson.Gson

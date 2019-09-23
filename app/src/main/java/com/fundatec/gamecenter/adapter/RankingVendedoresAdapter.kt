@@ -5,7 +5,6 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.fundatec.gamecenter.ProdutosActivity
 import com.fundatec.gamecenter.jsonData.VendedoresData
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.ranking_vendedores_list.view.*
@@ -45,23 +44,24 @@ class RankingVendedoresAdapter(var context: Context, var vendedores: ArrayList<V
 
         fun bindItems(item: VendedoresData, i: Int) {
 
-            itemView.nickVendedorR.text = item.usuario.nick
+            itemView.nickVendedorR.text = item.usuario!!.nick
             itemView.notaVendedorR.text = "Nota: " + item.notaVendedor
-            Picasso.get().load(item.usuario.foto).placeholder(com.fundatec.gamecenter.R.drawable.no_photo).fit().centerCrop()
+            Picasso.get().load(item.usuario!!.foto).placeholder(com.fundatec.gamecenter.R.drawable.no_photo).fit().centerCrop()
                 .into(itemView.fotoVendedorR)
 
-            if (i == 0) {
-                Picasso.get().load(com.fundatec.gamecenter.R.drawable.top_badge).fit().centerCrop()
-                    .into(itemView.topBadge)
-            } else {
-                Picasso.get().load(com.fundatec.gamecenter.R.drawable.abc_cab_background_internal_bg).fit().centerCrop()
-                    .into(itemView.topBadge)
-            }
+            if (i == 0)
+                itemView.topBadge.visibility = View.VISIBLE
+//                Picasso.get().load(com.fundatec.gamecenter.R.drawable.top_badge).fit().centerCrop()
+//                    .into(itemView.topBadge)
+//            } else {
+//                Picasso.get().load(com.fundatec.gamecenter.R.drawable.abc_cab_background_internal_bg).fit().centerCrop()
+//                    .into(itemView.topBadge)
+//            }
 
             itemView.setOnClickListener { v ->
                 val context = v.context
                 val intent = Intent(context, VendedorActivity::class.java)
-                intent.putExtra("nickVendedor", item.usuario.nick)
+                intent.putExtra("nickVendedor", item.usuario!!.nick)
                 context.startActivity(intent)
             }
         }
