@@ -13,9 +13,17 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ComunidadesActivity"
+            android:label="@string/title_activity_comunidades"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".CominudadesActivity"
+            android:label="@string/title_activity_cominudades"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".UsuariosActivity"
             android:label="@string/title_activity_usuarios"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ProdutoPostActivity"
             android:label="@string/title_activity_produto_post"

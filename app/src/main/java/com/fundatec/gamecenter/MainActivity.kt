@@ -59,5 +59,10 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(baseContext, LoginActivity::class.java)
             startActivity(intent)
         }
+
+        openComunidades.setOnClickListener {
+            val intent = Intent(baseContext, ComunidadesActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
