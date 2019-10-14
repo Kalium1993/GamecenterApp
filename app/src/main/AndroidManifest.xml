@@ -13,9 +13,21 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ComunidadeActivity"
+            android:label="@string/title_activity_comunidade"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Vendedor2Activity"
+            android:label="@string/title_activity_vendedor2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ComunidadePostActivity"
+            android:label="@string/title_activity_comunidade_post"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".ComunidadesActivity"
             android:label="@string/title_activity_comunidades"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CominudadesActivity"
             android:label="@string/title_activity_cominudades"
