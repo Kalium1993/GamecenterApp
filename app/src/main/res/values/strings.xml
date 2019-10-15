@@ -25,4 +25,6 @@
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
     <string name="title_activity_comunidade">Comunidade</string>
+    <string name="title_activity_topico_post">Criar Tópico</string>
+    <string name="title_activity_topico">Topico</string>
 </resources>
