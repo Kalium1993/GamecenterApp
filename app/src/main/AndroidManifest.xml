@@ -15,7 +15,7 @@
         <activity
             android:name=".TopicoActivity"
             android:label="@string/title_activity_topico"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".TopicoPostActivity"
             android:label="@string/title_activity_topico_post"
@@ -35,10 +35,6 @@
         <activity
             android:name=".ComunidadesActivity"
             android:label="@string/title_activity_comunidades"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".CominudadesActivity"
-            android:label="@string/title_activity_cominudades"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".UsuariosActivity"

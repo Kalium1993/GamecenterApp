@@ -16,7 +16,6 @@ import com.fundatec.gamecenter.R
 import com.fundatec.gamecenter.adapter.VendedorAdapter
 import com.fundatec.gamecenter.jsonData.ProdutosData
 import com.fundatec.gamecenter.request.GsonRequest
-import kotlinx.android.synthetic.main.content_vendedor.*
 import kotlinx.android.synthetic.main.fragment_vendedor_produtos.*
 
 private const val NICK_VENDEDOR = "nickVendedor"
@@ -32,8 +31,14 @@ class VendedorProdutosFragment : Fragment() {
             nickVendedor = it.getString(NICK_VENDEDOR)
         }
 
+
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         queue = Volley.newRequestQueue(activity?.baseContext)
-        recyclerProdutosVendedor.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+        recyclerProdutosVendedor2.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         readProdutosVendedor()
 
     }
@@ -45,7 +50,7 @@ class VendedorProdutosFragment : Fragment() {
             url, Array<ProdutosData>::class.java, null, Response.Listener { response ->
                 var adapter =
                     VendedorAdapter(activity!!.baseContext, ArrayList(response.toList()))
-                recyclerProdutosVendedor.adapter = adapter
+                recyclerProdutosVendedor2.adapter = adapter
 
             },
             Response.ErrorListener { error ->

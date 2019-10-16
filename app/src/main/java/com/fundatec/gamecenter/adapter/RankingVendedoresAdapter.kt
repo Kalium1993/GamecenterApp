@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.fundatec.gamecenter.Vendedor2Activity
 import com.fundatec.gamecenter.VendedorActivity
 import com.fundatec.gamecenter.jsonData.VendedoresData
 import com.squareup.picasso.Picasso
@@ -54,7 +55,7 @@ class RankingVendedoresAdapter(var context: Context, var vendedores: ArrayList<V
 
             itemView.setOnClickListener { v ->
                 val context = v.context
-                val intent = Intent(context, VendedorActivity::class.java)
+                val intent = Intent(context, Vendedor2Activity::class.java)
                 intent.putExtra("nickVendedor", item.usuario!!.nick)
                 context.startActivity(intent)
             }

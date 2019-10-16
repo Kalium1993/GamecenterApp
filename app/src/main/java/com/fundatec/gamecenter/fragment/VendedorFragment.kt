@@ -16,7 +16,6 @@ import com.fundatec.gamecenter.R
 import com.fundatec.gamecenter.jsonData.VendedoresData
 import com.fundatec.gamecenter.request.GsonJsonClassRequest
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.content_vendedor.*
 import kotlinx.android.synthetic.main.fragment_vendedor.*
 
 private const val NICK_VENDEDOR = "nickVendedor"
@@ -32,19 +31,19 @@ class VendedorFragment : Fragment() {
             nickVendedor = it.getString(NICK_VENDEDOR)
         }
 
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         queue = Volley.newRequestQueue(activity?.baseContext)
 
         readVendedor()
 
-        anunciarProduto2.setOnClickListener { v ->
-            val context =  v.context
-            val intent = Intent(context, ProdutoPostActivity::class.java)
-            intent.putExtra("nickVendedor", vendedorNick.text.toString())
-            context.startActivity(intent)
-        }
+
 
     }
-    
+
     private fun readVendedor() {
         var url = "https://gamecenter-api.herokuapp.com/gamecenter/vendedor/$nickVendedor"
 
@@ -62,6 +61,13 @@ class VendedorFragment : Fragment() {
                 }
 
                 notaVendedor2.text = "Nota de Vendedor: " + vendedor.notaVendedor
+
+                anunciarProduto2.setOnClickListener { v ->
+                    val context =  v.context
+                    val intent = Intent(context, ProdutoPostActivity::class.java)
+                    intent.putExtra("nickVendedor", vendedorNick2.text.toString())
+                    context.startActivity(intent)
+                }
             },
             Response.ErrorListener { error ->
                 Toast.makeText(activity?.baseContext, error.message, Toast.LENGTH_SHORT).show()
@@ -80,7 +86,7 @@ class VendedorFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance(param1: String) =
-            VendedorProdutosFragment().apply {
+            VendedorFragment().apply {
                 arguments = Bundle().apply {
                     putString(NICK_VENDEDOR, param1)
                 }

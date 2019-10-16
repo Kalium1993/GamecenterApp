@@ -27,4 +27,5 @@
     <string name="title_activity_comunidade">Comunidade</string>
     <string name="title_activity_topico_post">Criar Tópico</string>
     <string name="title_activity_topico">Topico</string>
+    <string name="title_activity_vendedor3">Vendedor3Activity</string>
 </resources>
