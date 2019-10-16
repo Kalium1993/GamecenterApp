@@ -10,5 +10,7 @@ data class MensagensData(
     var id: String? = null
     @SerializedName("topico")
     var topico: String? = null
+    @SerializedName("usuario")
+    var usuario: Usuario? = null
     constructor() : this("")
 }

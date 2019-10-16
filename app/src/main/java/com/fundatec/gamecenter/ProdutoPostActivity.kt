@@ -34,7 +34,7 @@ class ProdutoPostActivity : AppCompatActivity() {
     }
 
     private fun anunciar() {
-        var url = "https://gamecenter-api.herokuapp.com/gamecenter/$nickVendedor/produto/post"
+        var url = "https://gamecenter-api.herokuapp.com/gamecenter/$nickVendedor/produto/anunciar"
         var frete = postFrete.text.toString()
         var valor = postValor.text.toString()
 

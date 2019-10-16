@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.fundatec.gamecenter.R
 import com.fundatec.gamecenter.jsonData.MensagensData
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.mensagens_topico.view.*
 
 class MensagensAdapter(var context: Context, var mensagens: ArrayList<MensagensData>)
@@ -41,6 +42,8 @@ class MensagensAdapter(var context: Context, var mensagens: ArrayList<MensagensD
 
         fun bindItems(item: MensagensData) {
             itemView.mensagem.text = item.mensagem
+            itemView.msgUsuario.text = item.usuario!!.nick
+            Picasso.get().load(item.usuario!!.foto).placeholder(R.drawable.no_photo).fit().centerCrop().into(itemView.msgFoto)
 
         }
     }
