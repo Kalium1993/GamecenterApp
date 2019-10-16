@@ -1,11 +1,13 @@
 package com.fundatec.gamecenter
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
@@ -13,7 +15,9 @@ import com.fundatec.gamecenter.adapter.MensagensAdapter
 import com.fundatec.gamecenter.jsonData.MensagensData
 import com.fundatec.gamecenter.jsonData.TopicosData
 import com.fundatec.gamecenter.request.GsonJsonClassRequest
+import com.fundatec.gamecenter.request.GsonJsonRequest
 import com.fundatec.gamecenter.request.GsonRequest
+import com.google.gson.Gson
 
 import kotlinx.android.synthetic.main.activity_topico.*
 import kotlinx.android.synthetic.main.content_topico.*
@@ -77,7 +81,20 @@ class TopicoActivity : AppCompatActivity() {
     }
 
     private fun enviar() {
-        Toast.makeText( baseContext, "desenvolvendo", Toast.LENGTH_LONG).show()
+        var url = "https://gamecenter-api.herokuapp.com/gamecenter/comunidade/$idComunidade/topico/$idTopico/mensagem/post"
+
+        var mensagem = MensagensData(mensagemEnviar.text.toString())
+        var post = Gson().toJson(mensagem)
+
+        var request = GsonJsonRequest(Request.Method.POST, url, MensagensData::class.java, post, Response.Listener { response ->
+            val intent = Intent(baseContext, TopicoActivity::class.java)
+            intent.putExtra("idComunidade", idComunidade)
+            intent.putExtra("idTopico", idTopico)
+            startActivity(intent)
+        }, Response.ErrorListener { e ->
+            Toast.makeText( baseContext, "" + e.message, Toast.LENGTH_LONG).show()
+        })
+        queue?.add(request)
     }
 
 }

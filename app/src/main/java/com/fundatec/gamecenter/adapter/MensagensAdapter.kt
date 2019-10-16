@@ -1,7 +1,6 @@
 package com.fundatec.gamecenter.adapter
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,16 +40,7 @@ class MensagensAdapter(var context: Context, var mensagens: ArrayList<MensagensD
     class ViewHolder(itemView: View, var ctx: Context) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
         fun bindItems(item: MensagensData) {
-
             itemView.mensagem.text = item.mensagem
-
-//            itemView.setOnClickListener { v ->
-//                val context = v.context
-//                val intent = Intent(context, MensagensData::class.java)
-//                intent.putExtra("idComunidade", item.topico!!.comunidade)
-//                intent.putExtra("idTopico", item.topico!!.id)
-//                context.startActivity(intent)
-//            }
 
         }
     }
