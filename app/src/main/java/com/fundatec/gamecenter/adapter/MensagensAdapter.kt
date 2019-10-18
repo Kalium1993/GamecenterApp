@@ -42,9 +42,10 @@ class MensagensAdapter(var context: Context, var mensagens: ArrayList<MensagensD
 
         fun bindItems(item: MensagensData) {
             itemView.mensagem.text = item.mensagem
-            itemView.msgUsuario.text = item.usuario!!.nick
-            Picasso.get().load(item.usuario!!.foto).placeholder(R.drawable.no_photo).fit().centerCrop().into(itemView.msgFoto)
-
+            if(item.usuario != null) {
+                itemView.msgUsuario.text = item.usuario!!.nick
+                Picasso.get().load(item.usuario!!.foto).placeholder(R.drawable.no_photo).fit().centerCrop().into(itemView.msgFoto)
+            }
         }
     }
 }

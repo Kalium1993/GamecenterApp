@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -43,6 +44,19 @@ class TopicoActivity : AppCompatActivity() {
 
         enviarMsg.setOnClickListener {
             enviar()
+        }
+
+        delTopico.setOnClickListener {
+            val alerta = AlertDialog.Builder(this)
+            alerta.setMessage("Ao deletar o Tópico, todas as mensagens do mesmo também serão deletadas, e esta ação não poderá ser desfeita, confirmar?")
+            alerta.setCancelable(false)
+            alerta.setNegativeButton("Cancelar") { dialog, which ->
+
+            }
+            alerta.setPositiveButton("Confirmar"){ dialog, which ->
+                deletarTopico()
+            }
+            alerta.show()
         }
 
     }
@@ -90,6 +104,21 @@ class TopicoActivity : AppCompatActivity() {
             val intent = Intent(baseContext, TopicoActivity::class.java)
             intent.putExtra("idComunidade", idComunidade)
             intent.putExtra("idTopico", idTopico)
+            startActivity(intent)
+        }, Response.ErrorListener { e ->
+            Toast.makeText( baseContext, "" + e.message, Toast.LENGTH_LONG).show()
+        })
+        queue?.add(request)
+    }
+
+    private fun deletarTopico() {
+        var url = "https://gamecenter-api.herokuapp.com/gamecenter/comunidade/$idComunidade/topico/$idTopico/delete"
+        var topico = MensagensData()
+        var delete = Gson().toJson(topico)
+
+        var request = GsonJsonRequest(Request.Method.DELETE, url, MensagensData::class.java, delete, Response.Listener {
+            val intent = Intent(baseContext, ComunidadeActivity::class.java)
+            intent.putExtra("idComunidade", idComunidade)
             startActivity(intent)
         }, Response.ErrorListener { e ->
             Toast.makeText( baseContext, "" + e.message, Toast.LENGTH_LONG).show()

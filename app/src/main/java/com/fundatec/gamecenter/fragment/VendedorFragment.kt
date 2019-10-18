@@ -51,21 +51,21 @@ class VendedorFragment : Fragment() {
             url,
             VendedoresData::class.java,
             Response.Listener { vendedor ->
-                vendedorNick2.text = vendedor.usuario!!.nick
-                Picasso.get().load(vendedor.usuario!!.foto).placeholder(R.drawable.no_photo).fit().centerCrop().into(fotoVendedor2)
+                vendedorNick.text = vendedor.usuario!!.nick
+                Picasso.get().load(vendedor.usuario!!.foto).placeholder(R.drawable.no_photo).fit().centerCrop().into(fotoVendedor)
 
                 if (vendedor.usuario!!.nomeReal == null) {
-                    nomeVendedor2.text = ""
+                    nomeVendedor.text = ""
                 } else {
-                    nomeVendedor2.text = "(${vendedor.usuario!!.nomeReal})"
+                    nomeVendedor.text = "(${vendedor.usuario!!.nomeReal})"
                 }
 
-                notaVendedor2.text = "Nota de Vendedor: " + vendedor.notaVendedor
+                notaVendedor.text = "Nota de Vendedor: " + vendedor.notaVendedor
 
-                anunciarProduto2.setOnClickListener { v ->
+                anunciarProduto.setOnClickListener { v ->
                     val context =  v.context
                     val intent = Intent(context, ProdutoPostActivity::class.java)
-                    intent.putExtra("nickVendedor", vendedorNick2.text.toString())
+                    intent.putExtra("nickVendedor", vendedorNick.text.toString())
                     context.startActivity(intent)
                 }
             },

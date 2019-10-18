@@ -38,7 +38,7 @@ class VendedorProdutosFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         queue = Volley.newRequestQueue(activity?.baseContext)
-        recyclerProdutosVendedor2.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+        recyclerProdutosVendedor.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         readProdutosVendedor()
 
     }
@@ -50,7 +50,7 @@ class VendedorProdutosFragment : Fragment() {
             url, Array<ProdutosData>::class.java, null, Response.Listener { response ->
                 var adapter =
                     VendedorAdapter(activity!!.baseContext, ArrayList(response.toList()))
-                recyclerProdutosVendedor2.adapter = adapter
+                recyclerProdutosVendedor.adapter = adapter
 
             },
             Response.ErrorListener { error ->

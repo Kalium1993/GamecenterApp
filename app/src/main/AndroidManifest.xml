@@ -25,7 +25,7 @@
             android:label="@string/title_activity_comunidade"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Vendedor2Activity"
+            android:name=".VendedorActivity"
             android:label="@string/title_activity_vendedor2"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -59,10 +59,6 @@
         <activity
             android:name=".NewsActivity"
             android:label="@string/title_activity_news"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".VendedorActivity"
-            android:label="@string/title_activity_vendedor"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".RankingVendedoresActivity"
