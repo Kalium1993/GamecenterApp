@@ -45,6 +45,5 @@ class RankingVendedoresActivity : AppCompatActivity() {
             }
         )
         queue?.add(request)
-
     }
 }

@@ -28,4 +28,5 @@
     <string name="title_activity_topico_post">Criar Tópico</string>
     <string name="title_activity_topico">Topico</string>
     <string name="title_activity_vendedor3">Vendedor3Activity</string>
+    <string name="title_activity_pesquisa_geral">PesquisaGeralActivity</string>
 </resources>

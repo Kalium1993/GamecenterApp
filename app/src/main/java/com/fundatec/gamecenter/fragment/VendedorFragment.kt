@@ -35,13 +35,8 @@ class VendedorFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         queue = Volley.newRequestQueue(activity?.baseContext)
-
         readVendedor()
-
-
-
     }
 
     private fun readVendedor() {

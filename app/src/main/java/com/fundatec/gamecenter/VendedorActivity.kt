@@ -13,9 +13,10 @@ class VendedorActivity : AppCompatActivity() {
         setContentView(R.layout.activity_vendedor)
 
         val sectionsPagerAdapter = SectionsPagerAdapterVendedor(this, supportFragmentManager, intent.getStringExtra("nickVendedor"))
-        val viewPager: ViewPager = findViewById(R.id.view_pager)
 
+        val viewPager: ViewPager = findViewById(R.id.view_pager)
         viewPager.adapter = sectionsPagerAdapter
+
         val tabs: TabLayout = findViewById(R.id.tabs)
         tabs.setupWithViewPager(viewPager)
 

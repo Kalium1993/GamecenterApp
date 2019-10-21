@@ -20,11 +20,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun pesquisa() {
-
         pesquisar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String): Boolean {
-                val intent = Intent(baseContext, UsuariosActivity::class.java)
-                intent.putExtra("query", query)
+            override fun onQueryTextSubmit(pesquisa: String): Boolean {
+                val intent = Intent(baseContext, PesquisaGeralActivity::class.java)
+                intent.putExtra("pesquisa", pesquisa)
                 startActivity(intent)
                 return true
             }
@@ -34,9 +33,6 @@ class MainActivity : AppCompatActivity() {
                 return false
             }
         })
-
-
-
     }
 
     private fun openActivities() {
