@@ -58,6 +58,7 @@ class MainActivity : AppCompatActivity() {
 
         openComunidades.setOnClickListener {
             val intent = Intent(baseContext, ComunidadesActivity::class.java)
+            intent.putExtra("pesquisa", "")
             startActivity(intent)
         }
     }

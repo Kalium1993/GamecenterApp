@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".ComunidadeActivity"
-    tools:showIn="@layout/activity_comunidade">
+    tools:context=".ComunidadeActivity2"
+    tools:showIn="@layout/activity_comunidade2">
 
     <ImageView
-        android:id="@+id/imagemCmm"
+        android:id="@+id/imagemCmm2"
         android:layout_width="145dp"
         android:layout_height="145dp"
         android:layout_marginStart="8dp"
@@ -20,7 +20,7 @@
         app:srcCompat="@drawable/no_img" />
 
     <TextView
-        android:id="@+id/nomeCmm"
+        android:id="@+id/nomeCmm2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -31,11 +31,11 @@
         android:gravity="center"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imagemCmm"
+        app:layout_constraintStart_toEndOf="@+id/imagemCmm2"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/descricaoCmm"
+        android:id="@+id/descricaoCmm2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -45,8 +45,8 @@
         android:layout_marginRight="8dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imagemCmm"
-        app:layout_constraintTop_toBottomOf="@+id/nomeCmm" />
+        app:layout_constraintStart_toEndOf="@+id/imagemCmm2"
+        app:layout_constraintTop_toBottomOf="@+id/nomeCmm2" />
 
     <TextView
         android:id="@+id/textTopicos"
@@ -57,21 +57,21 @@
         android:layout_marginTop="16dp"
         android:text="Topicos:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imagemCmm" />
+        app:layout_constraintTop_toBottomOf="@+id/imagemCmm2" />
 
     <ImageView
-        android:id="@+id/deleteCmm"
+        android:id="@+id/deleteCmm2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descricaoCmm"
+        app:layout_constraintTop_toBottomOf="@+id/descricaoCmm2"
         app:srcCompat="@android:drawable/ic_menu_delete" />
 
     <TextView
-        android:id="@+id/addTopico"
+        android:id="@+id/addTopico2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -81,10 +81,10 @@
         android:text="Criar Tópico"
         android:textColor="#139905"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imagemCmm" />
+        app:layout_constraintTop_toBottomOf="@+id/imagemCmm2" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerTopicos"
+        android:id="@+id/recyclerTopicos2"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"

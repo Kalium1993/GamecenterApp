@@ -41,12 +41,16 @@ class PesquisaComunidadesFragment : Fragment() {
     private fun readComunidades() {
         var url = "https://gamecenter-api.herokuapp.com/gamecenter/pesquisar/comunidades/q=$pesquisa"
 
-        var request = GsonRequest(
-            url, Array<ComunidadesData>::class.java, null, Response.Listener { response ->
-                var adapter =
-                    ComunidadesAdapter(activity!!.baseContext, ArrayList(response.toList()))
-                recyclerPesquisaComunidades.adapter = adapter
-
+        var request = GsonRequest(url, Array<ComunidadesData>::class.java, null, Response.Listener { response ->
+                var lista = ArrayList(response.toList())
+                if(lista.isEmpty()) {
+                    recyclerPesquisaComunidades.visibility = View.GONE
+                    emptyCmm.visibility = View.VISIBLE
+                    emptyCmm.text = "Não foram encontrados resultados para a pesquisa: '$pesquisa'"
+                } else {
+                    var adapter = ComunidadesAdapter(activity!!.baseContext, ArrayList(response.toList()))
+                    recyclerPesquisaComunidades.adapter = adapter
+                }
             },
             Response.ErrorListener { error ->
                 Toast.makeText(activity?.baseContext, "" + error.message, Toast.LENGTH_LONG).show()

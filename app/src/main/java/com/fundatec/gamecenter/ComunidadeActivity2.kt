@@ -3,13 +3,9 @@ package com.fundatec.gamecenter
 import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
-import android.view.View
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
@@ -25,10 +21,10 @@ import com.fundatec.gamecenter.request.GsonRequest
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 
-import kotlinx.android.synthetic.main.activity_comunidade.*
-import kotlinx.android.synthetic.main.content_comunidade.*
+import kotlinx.android.synthetic.main.activity_comunidade2.*
+import kotlinx.android.synthetic.main.content_comunidade2.*
 
-class ComunidadeActivity : AppCompatActivity() {
+class ComunidadeActivity2 : AppCompatActivity() {
 
     private var queue : RequestQueue? = null
     private var idComunidade: String = ""
@@ -36,14 +32,14 @@ class ComunidadeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_comunidade)
+        setContentView(R.layout.activity_comunidade2)
         setSupportActionBar(toolbar)
 
         idComunidade = intent.getStringExtra("idComunidade")
         queue = Volley.newRequestQueue(baseContext)
-        recyclerTopicos.layoutManager = LinearLayoutManager(baseContext, RecyclerView.VERTICAL, false)
+        recyclerTopicos2.layoutManager = LinearLayoutManager(baseContext, RecyclerView.VERTICAL, false)
 
-        addTopico.paintFlags = addTopico.paintFlags or Paint.UNDERLINE_TEXT_FLAG
+        addTopico2.paintFlags = addTopico2.paintFlags or Paint.UNDERLINE_TEXT_FLAG
         readComunidade()
         readTopicos()
         criarTopico()
@@ -56,11 +52,11 @@ class ComunidadeActivity : AppCompatActivity() {
             url,
             ComunidadesData::class.java,
             Response.Listener { comunidade ->
-                nomeCmm.text = comunidade.nome
-                Picasso.get().load(comunidade.imagem).placeholder(R.drawable.no_img).fit().centerCrop().into(imagemCmm)
-                descricaoCmm.text = comunidade.descricao
+                nomeCmm2.text = comunidade.nome
+                Picasso.get().load(comunidade.imagem).placeholder(R.drawable.no_img).fit().centerCrop().into(imagemCmm2)
+                descricaoCmm2.text = comunidade.descricao
 
-                deleteCmm.setOnClickListener {
+                deleteCmm2.setOnClickListener {
                     val alerta = AlertDialog.Builder(this)
                     alerta.setMessage("Ao deletar a comunidade, todos os tópicos, e as mensagens dos mesmos, também serão excluídos, deseja continuar?")
                     alerta.setCancelable(false)
@@ -86,7 +82,7 @@ class ComunidadeActivity : AppCompatActivity() {
         var request = GsonRequest(
             url, Array<TopicosData>::class.java, null, Response.Listener { response ->
                 var adapter = TopicosAdapter(baseContext, ArrayList(response.toList()))
-                recyclerTopicos.adapter = adapter
+                recyclerTopicos2.adapter = adapter
             },
             Response.ErrorListener { error ->
                 Toast.makeText(baseContext, "" + error.message, Toast.LENGTH_LONG).show()
@@ -113,7 +109,7 @@ class ComunidadeActivity : AppCompatActivity() {
     }
 
     private fun criarTopico() {
-        addTopico.setOnClickListener { v ->
+        addTopico2.setOnClickListener { v ->
             val context =  v.context
             val intent = Intent(context, TopicoPostActivity::class.java)
             intent.putExtra("idComunidade", idComunidade)

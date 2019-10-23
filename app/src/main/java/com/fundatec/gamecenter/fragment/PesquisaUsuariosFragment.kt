@@ -41,11 +41,16 @@ class PesquisaUsuariosFragment : Fragment() {
     private fun readUsuarios() {
         var url = "https://gamecenter-api.herokuapp.com/gamecenter/pesquisar/usuarios/q=$pesquisa"
 
-        var request = GsonRequest(
-            url, Array<UsuariosData>::class.java, null, Response.Listener { response ->
-                var adapter =
-                    UsuariosAdapter(activity!!.baseContext, ArrayList(response.toList()))
-                recyclerPesquisaUsuarios.adapter = adapter
+        var request = GsonRequest(url, Array<UsuariosData>::class.java, null, Response.Listener { response ->
+                var lista = ArrayList(response.toList())
+                if(lista.isEmpty()) {
+                    recyclerPesquisaUsuarios.visibility = View.GONE
+                    emptyUsuario.visibility = View.VISIBLE
+                    emptyUsuario.text = "Não foram encontrados resultados para a pesquisa: '$pesquisa'"
+                } else {
+                    var adapter = UsuariosAdapter(activity!!.baseContext, lista)
+                    recyclerPesquisaUsuarios.adapter = adapter
+                }
             },
             Response.ErrorListener { error ->
                 Toast.makeText(activity?.baseContext, "" + error.message, Toast.LENGTH_LONG).show()

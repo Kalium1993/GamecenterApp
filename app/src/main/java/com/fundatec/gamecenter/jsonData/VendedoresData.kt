@@ -9,6 +9,10 @@ data class VendedoresData(
     var id: String? = null
     @SerializedName("notaVendedor")
     var notaVendedor: Double? = null
+    @SerializedName("notaTotal")
+    var notaTotal: Double? = null
+    @SerializedName("vendas")
+    var vendas: Double? = null
     @SerializedName("usuario")
     var usuario: Usuario? = null
     constructor() : this( "" )

@@ -2,7 +2,6 @@ package com.fundatec.gamecenter
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -117,7 +116,7 @@ class TopicoActivity : AppCompatActivity() {
         var delete = Gson().toJson(topico)
 
         var request = GsonJsonRequest(Request.Method.DELETE, url, MensagensData::class.java, delete, Response.Listener {
-            val intent = Intent(baseContext, ComunidadeActivity::class.java)
+            val intent = Intent(baseContext, ComunidadeActivity2::class.java)
             intent.putExtra("idComunidade", idComunidade)
             startActivity(intent)
         }, Response.ErrorListener { e ->

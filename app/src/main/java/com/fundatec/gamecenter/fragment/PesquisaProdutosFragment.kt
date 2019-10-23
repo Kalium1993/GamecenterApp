@@ -16,6 +16,7 @@ import com.fundatec.gamecenter.R
 import com.fundatec.gamecenter.adapter.ProdutosAdapter
 import com.fundatec.gamecenter.jsonData.ProdutosData
 import com.fundatec.gamecenter.request.GsonRequest
+import kotlinx.android.synthetic.main.fragment_pesquisa_comunidades.*
 import kotlinx.android.synthetic.main.fragment_pesquisa_produtos.*
 
 private const val PESQUISA = "pesquisa"
@@ -41,12 +42,16 @@ class PesquisaProdutosFragment : Fragment() {
     private fun readProdutos() {
         var url = "https://gamecenter-api.herokuapp.com/gamecenter/pesquisar/produtos/q=$pesquisa"
 
-        var request = GsonRequest(
-            url, Array<ProdutosData>::class.java, null, Response.Listener { response ->
-                var adapter =
-                    ProdutosAdapter(activity!!.baseContext, ArrayList(response.toList()))
-                recyclerPesquisaProdutos.adapter = adapter
-
+        var request = GsonRequest(url, Array<ProdutosData>::class.java, null, Response.Listener { response ->
+                var lista = ArrayList(response.toList())
+                if(lista.isEmpty()) {
+                    recyclerPesquisaProdutos.visibility = View.GONE
+                    emptyProduto.visibility = View.VISIBLE
+                    emptyProduto.text = "Não foram encontrados resultados para a pesquisa: '$pesquisa'"
+                } else {
+                    var adapter = ProdutosAdapter(activity!!.baseContext, lista)
+                    recyclerPesquisaProdutos.adapter = adapter
+                }
             },
             Response.ErrorListener { error ->
                 Toast.makeText(activity?.baseContext, "" + error.message, Toast.LENGTH_LONG).show()

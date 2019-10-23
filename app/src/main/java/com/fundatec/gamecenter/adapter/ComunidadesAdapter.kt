@@ -5,7 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.fundatec.gamecenter.ComunidadeActivity
+import com.fundatec.gamecenter.ComunidadeActivity2
 import com.fundatec.gamecenter.R
 import com.fundatec.gamecenter.jsonData.ComunidadesData
 import com.squareup.picasso.Picasso
@@ -50,7 +50,7 @@ class ComunidadesAdapter(var context: Context, var comunidades: ArrayList<Comuni
 
             itemView.setOnClickListener { v ->
                 val context = v.context
-                val intent = Intent(context, ComunidadeActivity::class.java)
+                val intent = Intent(context, ComunidadeActivity2::class.java)
                 intent.putExtra("idComunidade", item.id)
                 context.startActivity(intent)
             }

@@ -41,12 +41,16 @@ class PesquisaVendedoresFragment : Fragment() {
     private fun readVendedores() {
         var url = "https://gamecenter-api.herokuapp.com/gamecenter/pesquisar/vendedores/q=$pesquisa"
 
-        var request = GsonRequest(
-            url, Array<VendedoresData>::class.java, null, Response.Listener { response ->
-                var adapter =
-                    RankingVendedoresAdapter(activity!!.baseContext, ArrayList(response.toList()))
-                recyclerPesquisaVendedores.adapter = adapter
-
+        var request = GsonRequest(url, Array<VendedoresData>::class.java, null, Response.Listener { response ->
+                var lista = ArrayList(response.toList())
+                if(lista.isEmpty()) {
+                    recyclerPesquisaVendedores.visibility = View.GONE
+                    emptyVendedor.visibility = View.VISIBLE
+                    emptyVendedor.text = "Não foram encontrados resultados para a pesquisa: '$pesquisa'"
+                } else {
+                    var adapter = RankingVendedoresAdapter(activity!!.baseContext, ArrayList(response.toList()))
+                    recyclerPesquisaVendedores.adapter = adapter
+                }
             },
             Response.ErrorListener { error ->
                 Toast.makeText(activity?.baseContext, "" + error.message, Toast.LENGTH_LONG).show()
