@@ -10,9 +10,8 @@ import com.fundatec.gamecenter.jsonData.VendedoresData
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.vendedores_list.view.*
 
-
-class RankingVendedoresAdapter(var context: Context, var vendedores: ArrayList<VendedoresData>)
-    : androidx.recyclerview.widget.RecyclerView.Adapter<RankingVendedoresAdapter.ViewHolder>() {
+class PesquisaVendedoresAdapter (var context: Context, var vendedores: ArrayList<VendedoresData>)
+    : androidx.recyclerview.widget.RecyclerView.Adapter<PesquisaVendedoresAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(com.fundatec.gamecenter.R.layout.vendedores_list, parent, false)
@@ -50,9 +49,6 @@ class RankingVendedoresAdapter(var context: Context, var vendedores: ArrayList<V
             itemView.notaVendedorR.text = "Nota: " + item.notaVendedor
             Picasso.get().load(item.usuario!!.foto).placeholder(com.fundatec.gamecenter.R.drawable.no_photo).fit().centerCrop()
                 .into(itemView.fotoVendedorR)
-
-            if (i == 0)
-                itemView.topBadge.visibility = View.VISIBLE
 
             itemView.setOnClickListener { v ->
                 val context = v.context
