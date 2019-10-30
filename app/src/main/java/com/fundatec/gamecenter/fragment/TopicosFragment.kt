@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,15 +21,18 @@ import com.fundatec.gamecenter.request.GsonRequest
 import kotlinx.android.synthetic.main.fragment_topicos.*
 
 private const val ID_COMUNIDADE = "idComunidade"
+private const val PESQUISA = "pesquisa"
 
 class TopicosFragment : Fragment() {
     private var idComunidade: String? = null
+    private var pesquisa: String? = null
     private var queue : RequestQueue? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             idComunidade = it.getString(ID_COMUNIDADE)
+            pesquisa = it.getString(PESQUISA)
         }
     }
 
@@ -38,10 +42,15 @@ class TopicosFragment : Fragment() {
         recyclerTopicos.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         readTopicos()
         postTopico()
+        pesquisa()
     }
 
     private fun readTopicos() {
-        var url = "https://gamecenter-api.herokuapp.com/gamecenter/comunidade/$idComunidade/topicos"
+        var url = if(pesquisa!!.isEmpty())
+            "https://gamecenter-api.herokuapp.com/gamecenter/comunidade/$idComunidade/topicos"
+        else
+            "https://gamecenter-api.herokuapp.com/gamecenter/comunidade/$idComunidade/pesquisar/topicos/q=$pesquisa"
+
         var request = GsonRequest(
             url, Array<TopicosData>::class.java, null, Response.Listener { response ->
                 var adapter = TopicosAdapter(activity!!.baseContext, ArrayList(response.toList()))
@@ -63,6 +72,37 @@ class TopicosFragment : Fragment() {
         }
     }
 
+    private fun pesquisa() {
+        searchTopicos.setOnSearchClickListener {
+            criarTopico.visibility = View.GONE
+        }
+
+        searchTopicos.setOnCloseListener(object : SearchView.OnCloseListener {
+            override fun onClose(): Boolean {
+                criarTopico.visibility = View.VISIBLE
+                return false
+            }
+        })
+
+        searchTopicos.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(pesquisa: String): Boolean {
+//                val intent = Intent(activity?.baseContext, TopicosFragment::class.java)
+//                intent.putExtra("idComunidade", idComunidade)
+//                intent.putExtra("pesquisa", pesquisa)
+//
+//                var ctx = requireActivity()
+//                ctx.supportFragmentManager.beginTransaction().detach(this).attach(this).commit()
+                Toast.makeText(activity?.baseContext, pesquisa, Toast.LENGTH_LONG).show()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                // do something when text changes
+                return false
+            }
+        })
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -72,10 +112,11 @@ class TopicosFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(param1: String) =
+        fun newInstance(idComunidade: String, pesquisa: String) =
             TopicosFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ID_COMUNIDADE, param1)
+                    putString(ID_COMUNIDADE, idComunidade)
+                    putString(PESQUISA, pesquisa)
                 }
             }
     }

@@ -12,8 +12,8 @@ import com.fundatec.gamecenter.jsonData.ProdutosData
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.produtos_vendedor.view.*
 
-class VendedorAdapter(var context: Context, var produtos: ArrayList<ProdutosData>)
-    : androidx.recyclerview.widget.RecyclerView.Adapter<VendedorAdapter.ViewHolder>() {
+class ProdutosVendedorAdapter(var context: Context, var produtos: ArrayList<ProdutosData>)
+    : androidx.recyclerview.widget.RecyclerView.Adapter<ProdutosVendedorAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.produtos_vendedor, parent, false)

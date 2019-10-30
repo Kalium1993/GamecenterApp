@@ -12,13 +12,13 @@ private val TAB_TITLES = arrayOf(
     "Topicos"
 )
 
-class SectionsPagerAdapterComunidade(private val context: Context, fm: FragmentManager, val idComunidade: String) : FragmentPagerAdapter(fm) {
+class SectionsPagerAdapterComunidade(private val context: Context, fm: FragmentManager, val idComunidade: String, val pesquisa: String) : FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
         var fragment: Fragment? = null
         when (position) {
             0 -> fragment = ComunidadeFragment.newInstance(idComunidade)
-            1 -> fragment = TopicosFragment.newInstance(idComunidade)
+            1 -> fragment = TopicosFragment.newInstance(idComunidade, pesquisa)
         }
         return fragment!!
     }

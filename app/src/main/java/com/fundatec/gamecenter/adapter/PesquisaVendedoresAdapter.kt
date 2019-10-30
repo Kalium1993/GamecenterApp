@@ -44,9 +44,15 @@ class PesquisaVendedoresAdapter (var context: Context, var vendedores: ArrayList
         fun bindItems(item: VendedoresData, i: Int) {
             var vendasTotais = item.vendas.toString().split(".")
 
+            if (item.vendas!! > 0) {
+                itemView.vendasVendedorR.text = "Vendas Realizadas: " + vendasTotais[0]
+                itemView.notaVendedorR.text = "Nota: " + item.notaVendedor
+            } else {
+                itemView.vendasVendedorR.visibility = View.GONE
+                itemView.notaVendedorR.text = "(Nenhuma venda efetuada)"
+            }
+
             itemView.nickVendedorR.text = item.usuario!!.nick
-            itemView.vendasVendedorR.text = "Vendas Realizadas: " + vendasTotais[0]
-            itemView.notaVendedorR.text = "Nota: " + item.notaVendedor
             Picasso.get().load(item.usuario!!.foto).placeholder(com.fundatec.gamecenter.R.drawable.no_photo).fit().centerCrop()
                 .into(itemView.fotoVendedorR)
 

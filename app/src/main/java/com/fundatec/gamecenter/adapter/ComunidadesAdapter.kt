@@ -51,6 +51,7 @@ class ComunidadesAdapter(var context: Context, var comunidades: ArrayList<Comuni
                 val context = v.context
                 val intent = Intent(context, ComunidadeActivity::class.java)
                 intent.putExtra("idComunidade", item.id)
+                intent.putExtra("pesquisa", "")
                 context.startActivity(intent)
             }
 

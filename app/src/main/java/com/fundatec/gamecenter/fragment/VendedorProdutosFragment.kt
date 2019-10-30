@@ -13,7 +13,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.Volley
 
 import com.fundatec.gamecenter.R
-import com.fundatec.gamecenter.adapter.VendedorAdapter
+import com.fundatec.gamecenter.adapter.ProdutosVendedorAdapter
 import com.fundatec.gamecenter.jsonData.ProdutosData
 import com.fundatec.gamecenter.request.GsonRequest
 import kotlinx.android.synthetic.main.fragment_vendedor_produtos.*
@@ -49,7 +49,7 @@ class VendedorProdutosFragment : Fragment() {
         var request = GsonRequest(
             url, Array<ProdutosData>::class.java, null, Response.Listener { response ->
                 var adapter =
-                    VendedorAdapter(activity!!.baseContext, ArrayList(response.toList()))
+                    ProdutosVendedorAdapter(activity!!.baseContext, ArrayList(response.toList()))
                 recyclerProdutosVendedor.adapter = adapter
 
             },

@@ -55,7 +55,17 @@ class VendedorFragment : Fragment() {
                     nomeVendedor.text = "(${vendedor.usuario!!.nomeReal})"
                 }
 
-                notaVendedor.text = "Nota de Vendedor: " + vendedor.notaVendedor
+                if(vendedor.vendas!! > 0) {
+                    var vendasTotais = vendedor.vendas.toString().split(".")
+
+                    vendasVendedor.text = "Vendas Realizadas: " + vendasTotais[0]
+                    notaVendedor.text = "Nota de Vendedor: " + vendedor.notaVendedor
+                } else {
+                    vendasVendedor.visibility = View.GONE
+                    notaVendedor.text = "(Nenhuma venda efetuada)"
+                }
+
+
 
                 anunciarProduto.setOnClickListener { v ->
                     val context =  v.context

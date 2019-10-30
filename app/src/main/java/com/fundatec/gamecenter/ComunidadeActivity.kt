@@ -17,7 +17,7 @@ class ComunidadeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comunidade)
 
-        val sectionsPagerAdapter = SectionsPagerAdapterComunidade(this, supportFragmentManager, intent.getStringExtra("idComunidade"))
+        val sectionsPagerAdapter = SectionsPagerAdapterComunidade(this, supportFragmentManager, intent.getStringExtra("idComunidade"), intent.getStringExtra("pesquisa"))
 
         val viewPager: ViewPager = findViewById(R.id.view_pager)
         viewPager.adapter = sectionsPagerAdapter
