@@ -13,7 +13,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.Volley
 
 import com.fundatec.gamecenter.R
-import com.fundatec.gamecenter.adapter.RankingVendedoresAdapter
+import com.fundatec.gamecenter.adapter.PesquisaVendedoresAdapter
 import com.fundatec.gamecenter.jsonData.VendedoresData
 import com.fundatec.gamecenter.request.GsonRequest
 import kotlinx.android.synthetic.main.fragment_pesquisa_vendedores.*
@@ -48,7 +48,7 @@ class PesquisaVendedoresFragment : Fragment() {
                     emptyVendedor.visibility = View.VISIBLE
                     emptyVendedor.text = "Não foram encontrados resultados para a pesquisa: '$pesquisa'"
                 } else {
-                    var adapter = RankingVendedoresAdapter(activity!!.baseContext, ArrayList(response.toList()))
+                    var adapter = PesquisaVendedoresAdapter(activity!!.baseContext, ArrayList(response.toList()))
                     recyclerPesquisaVendedores.adapter = adapter
                 }
             },
