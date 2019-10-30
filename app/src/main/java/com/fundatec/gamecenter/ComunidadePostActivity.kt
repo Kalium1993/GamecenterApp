@@ -44,7 +44,9 @@ class ComunidadePostActivity : AppCompatActivity() {
         var post = Gson().toJson(comunidade)
 
         var request = GsonJsonRequest(Request.Method.POST, url, ComunidadesData::class.java, post, Response.Listener { response ->
-            val intent = Intent(baseContext, ComunidadesActivity::class.java)
+            val intent = Intent(baseContext, ComunidadeActivity::class.java)
+            var idComunidade = comunidade.id
+            intent.putExtra("idComunidade", idComunidade)
             startActivity(intent)
         }, Response.ErrorListener { e ->
             Toast.makeText( baseContext, "" + e.message, Toast.LENGTH_LONG).show()

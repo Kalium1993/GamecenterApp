@@ -72,10 +72,14 @@ class ComunidadesActivity : AppCompatActivity() {
 
         var request = GsonRequest(url, Array<ComunidadesData>::class.java, null, Response.Listener { response ->
                 var lista = ArrayList(response.toList())
-                if(lista.isEmpty()) {
+                if(lista.isEmpty() && pesquisa.isNotEmpty()) {
                     recyclerComunidades.visibility = View.GONE
                     emptyCmms.visibility = View.VISIBLE
                     emptyCmms.text = "Não foram encontrados resultados para a pesquisa: '$pesquisa'"
+                } else if (lista.isEmpty() && pesquisa.isEmpty()) {
+                    recyclerComunidades.visibility = View.GONE
+                    emptyCmms.visibility = View.VISIBLE
+                    emptyCmms.text = "Ainda não existem comunidades, crie a sua ;)"
                 }
 
                 var adapter = ComunidadesAdapter(baseContext, lista)

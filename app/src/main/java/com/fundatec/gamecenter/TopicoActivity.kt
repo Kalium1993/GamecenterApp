@@ -116,7 +116,7 @@ class TopicoActivity : AppCompatActivity() {
         var delete = Gson().toJson(topico)
 
         var request = GsonJsonRequest(Request.Method.DELETE, url, MensagensData::class.java, delete, Response.Listener {
-            val intent = Intent(baseContext, ComunidadeActivity2::class.java)
+            val intent = Intent(baseContext, ComunidadeActivity::class.java)
             intent.putExtra("idComunidade", idComunidade)
             startActivity(intent)
         }, Response.ErrorListener { e ->

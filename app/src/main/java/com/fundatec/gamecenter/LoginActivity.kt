@@ -2,6 +2,7 @@ package com.fundatec.gamecenter
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
@@ -36,6 +37,28 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(context, UsuarioActivity::class.java)
             intent.putExtra("nick", logarNick.text.toString())
             context.startActivity(intent)
+        }
+
+        msgRegistrar.setOnClickListener {
+            registrar.visibility = View.VISIBLE
+            registrarNick.visibility = View.VISIBLE
+            registrarEmail.visibility = View.VISIBLE
+            registrarSenha.visibility = View.VISIBLE
+
+            logar.visibility = View.GONE
+            logarNick.visibility = View.GONE
+            logarSenha.visibility = View.GONE
+        }
+
+        msgLogar.setOnClickListener {
+            registrar.visibility = View.GONE
+            registrarNick.visibility = View.GONE
+            registrarEmail.visibility = View.GONE
+            registrarSenha.visibility = View.GONE
+
+            logar.visibility = View.VISIBLE
+            logarNick.visibility = View.VISIBLE
+            logarSenha.visibility = View.VISIBLE
         }
     }
 

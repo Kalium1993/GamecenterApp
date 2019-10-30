@@ -13,9 +13,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ComunidadeActivity"
+            android:label="@string/title_activity_comunidade"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".PesquisaGeralActivity"
             android:label="@string/title_activity_pesquisa_geral"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".TopicoActivity"
             android:label="@string/title_activity_topico"

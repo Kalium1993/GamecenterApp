@@ -66,6 +66,13 @@ class UsuarioActivity : AppCompatActivity() {
             urlFoto.visibility = View.VISIBLE
         }
 
+        acessarPerfilVendedor.setOnClickListener { v ->
+            val context = v.context
+            val intent = Intent(context, VendedorActivity::class.java)
+            intent.putExtra("nickVendedor", nick)
+            context.startActivity(intent)
+        }
+
     }
 
     private fun readUsuario() {
@@ -95,6 +102,7 @@ class UsuarioActivity : AppCompatActivity() {
                 }
 
                 if (usuario.vendedor!!) {
+                    acessarPerfilVendedor.visibility = View.VISIBLE
                     ShowAtivarVendedor.text = "Desativar perfil de vendedor"
                     ShowAtivarVendedor.setOnClickListener {
                         val alerta = AlertDialog.Builder(this)
