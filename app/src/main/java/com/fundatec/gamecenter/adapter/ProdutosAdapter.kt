@@ -10,6 +10,7 @@ import com.fundatec.gamecenter.R
 import com.fundatec.gamecenter.jsonData.ProdutosData
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.produtos_list.view.*
+import java.text.SimpleDateFormat
 
 class ProdutosAdapter(var context: Context, var produtos: ArrayList<ProdutosData>)
     : androidx.recyclerview.widget.RecyclerView.Adapter<ProdutosAdapter.ViewHolder>() {
@@ -43,10 +44,12 @@ class ProdutosAdapter(var context: Context, var produtos: ArrayList<ProdutosData
     class ViewHolder(itemView: View, var ctx: Context) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
         fun bindItems(item: ProdutosData) {
+            val df = SimpleDateFormat("dd/MM/yyyy")
 
             itemView.nomeProduto.text = item.nome
             itemView.descricaoProduto.text = item.descricao
             Picasso.get().load(item.imagem).placeholder(R.drawable.no_img).fit().centerCrop().into(itemView.imagemProduto)
+            itemView.dataAnuncioProduto.text = "Anunciado Em: " + df.format(item.dataAnuncio)
 
             itemView.setOnClickListener { v ->
                 val context = v.context

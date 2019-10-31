@@ -1,5 +1,6 @@
 package com.fundatec.gamecenter.jsonData
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
 data class ProdutosData(
     @SerializedName("nome")
@@ -24,6 +25,8 @@ data class ProdutosData(
     var valor: Double? = null
     @SerializedName("vendido")
     var vendido: Boolean? = null
+    @SerializedName("dataAnuncio")
+    var dataAnuncio: Date? = null
     constructor() : this( "" )
 
     constructor(descricao: String, frete: Double, imagem: String?, nome: String, valor: Double) : this(nome) {

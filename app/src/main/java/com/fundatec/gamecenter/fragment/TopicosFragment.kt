@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
+import com.fundatec.gamecenter.ComunidadeActivity
 import com.fundatec.gamecenter.R
 import com.fundatec.gamecenter.TopicoPostActivity
 import com.fundatec.gamecenter.adapter.TopicosAdapter
@@ -86,13 +87,11 @@ class TopicosFragment : Fragment() {
 
         searchTopicos.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(pesquisa: String): Boolean {
-//                val intent = Intent(activity?.baseContext, TopicosFragment::class.java)
-//                intent.putExtra("idComunidade", idComunidade)
-//                intent.putExtra("pesquisa", pesquisa)
-//
-//                var ctx = requireActivity()
-//                ctx.supportFragmentManager.beginTransaction().detach(this).attach(this).commit()
-                Toast.makeText(activity?.baseContext, pesquisa, Toast.LENGTH_LONG).show()
+                val intent = Intent(activity?.baseContext, ComunidadeActivity::class.java)
+                intent.putExtra("idComunidade", idComunidade)
+                intent.putExtra("pesquisa", pesquisa)
+                startActivity(intent)
+
                 return true
             }
 
