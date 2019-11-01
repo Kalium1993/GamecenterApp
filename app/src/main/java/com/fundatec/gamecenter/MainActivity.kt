@@ -61,5 +61,11 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("pesquisa", "")
             startActivity(intent)
         }
+
+        openRankingJogos.setOnClickListener {
+            val intent = Intent(baseContext, RankingJogosActivity::class.java)
+            intent.putExtra("param1", "")
+            startActivity(intent)
+        }
     }
 }

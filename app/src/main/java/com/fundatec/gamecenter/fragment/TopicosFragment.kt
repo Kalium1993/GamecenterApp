@@ -52,8 +52,18 @@ class TopicosFragment : Fragment() {
         else
             "https://gamecenter-api.herokuapp.com/gamecenter/comunidade/$idComunidade/pesquisar/topicos/q=$pesquisa"
 
-        var request = GsonRequest(
-            url, Array<TopicosData>::class.java, null, Response.Listener { response ->
+        var request = GsonRequest(url, Array<TopicosData>::class.java, null, Response.Listener { response ->
+                var lista = ArrayList(response.toList())
+                if(lista.isEmpty() && pesquisa!!.isNotEmpty()) {
+                    recyclerTopicos.visibility = View.GONE
+                    emptyTopicos.visibility = View.VISIBLE
+                    emptyTopicos.text = "Não foram encontrados resultados para a pesquisa: '$pesquisa'"
+                } else if (lista.isEmpty() && pesquisa!!.isEmpty()) {
+                    recyclerTopicos.visibility = View.GONE
+                    emptyTopicos.visibility = View.VISIBLE
+                }
+
+
                 var adapter = TopicosAdapter(activity!!.baseContext, ArrayList(response.toList()))
                 recyclerTopicos.adapter = adapter
             },

@@ -129,4 +129,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/openNews" />
 
+    <TextView
+        android:id="@+id/homeRankingJogos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:text="Ranking de Jogos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/openNews" />
+
+    <ImageView
+        android:id="@+id/openRankingJogos"
+        android:layout_width="119dp"
+        android:layout_height="114dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/homeRankingJogos"
+        app:srcCompat="@drawable/ranking_games" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

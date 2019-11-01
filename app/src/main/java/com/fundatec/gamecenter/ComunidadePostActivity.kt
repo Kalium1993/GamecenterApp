@@ -37,8 +37,8 @@ class ComunidadePostActivity : AppCompatActivity() {
         var url = "https://gamecenter-api.herokuapp.com/gamecenter/comunidade/criar"
 
         var imagem: String ?= null
-        if (postComunidadeDescricao.text.toString().trim().isNotEmpty())
-            imagem = postComunidadeDescricao.text.toString()
+        if (postComunidadeImagem.text.toString().trim().isNotEmpty())
+            imagem = postComunidadeImagem.text.toString()
 
         var comunidade = ComunidadesData(postComunidadeNome.text.toString(), postComunidadeDescricao.text.toString(), imagem)
         var post = Gson().toJson(comunidade)

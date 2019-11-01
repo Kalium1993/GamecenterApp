@@ -5,11 +5,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.fundatec.gamecenter.fragment.VendedorFragment
-import com.fundatec.gamecenter.fragment.VendedorProdutosFragment
+import com.fundatec.gamecenter.fragment.VendedorProdutosVendaFragment
+import com.fundatec.gamecenter.fragment.VendedorProdutosVendidosFragment
 
 private val TAB_TITLES = arrayOf(
     "Vendedor",
-    "Produtos"
+    "Produtos \nà Venda",
+    "Produtos \nVendidos"
 )
 
 class SectionsPagerAdapterVendedor(private val context: Context, fm: FragmentManager, val nickVendedor: String) : FragmentPagerAdapter(fm) {
@@ -18,7 +20,8 @@ class SectionsPagerAdapterVendedor(private val context: Context, fm: FragmentMan
         var fragment: Fragment? = null
         when (position) {
             0 -> fragment = VendedorFragment.newInstance(nickVendedor)
-            1 -> fragment = VendedorProdutosFragment.newInstance(nickVendedor)
+            1 -> fragment = VendedorProdutosVendaFragment.newInstance(nickVendedor)
+            2 -> fragment = VendedorProdutosVendidosFragment.newInstance(nickVendedor)
         }
         return fragment!!
     }
@@ -28,6 +31,6 @@ class SectionsPagerAdapterVendedor(private val context: Context, fm: FragmentMan
     }
 
     override fun getCount(): Int {
-        return 2
+        return 3
     }
 }

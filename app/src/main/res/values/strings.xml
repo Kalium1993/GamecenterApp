@@ -29,4 +29,6 @@
     <string name="title_activity_topico">Topico</string>
     <string name="title_activity_vendedor3">Vendedor3Activity</string>
     <string name="title_activity_pesquisa_geral">PesquisaGeralActivity</string>
+    <string name="title_activity_ranking_jogos">RankingJogosActivity</string>
+    <string name="title_activity_jogo">Jogo</string>
 </resources>

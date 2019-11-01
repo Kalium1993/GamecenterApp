@@ -51,10 +51,8 @@ class ProdutosVendedorAdapter(var context: Context, var produtos: ArrayList<Prod
             itemView.nomeProdutoVendedor.text = item.nome
             Picasso.get().load(item.imagem).placeholder(R.drawable.no_img).fit().centerCrop().into(itemView.imagemProdutoVendedor)
             if (!item.vendido!!) {
-                itemView.vendido.setTextColor(Color.BLUE)
                 itemView.descricaoProdutoVendedor.text = item.descricao
                 itemView.notaVendaProduto.text = ""
-                itemView.vendido.text = "Produto á Venda!"
                 itemView.cmmComprador.text = ""
 
                 itemView.setOnClickListener { v ->
@@ -66,11 +64,10 @@ class ProdutosVendedorAdapter(var context: Context, var produtos: ArrayList<Prod
                 }
 
             } else {
-                itemView.vendido.setTextColor(Color.RED)
+                itemView.dataAnuncioProdutoVendedor.visibility = View.GONE
                 var comentario = item.cmmComprador ?: "comprador não comentou"
                 itemView.descricaoProdutoVendedor.text = comentario
                 itemView.notaVendaProduto.text = "Nota da Venda: " + item.notaVenda
-                itemView.vendido.text = "Produto Vendido!"
             }
 
             if (i == (size - 1)) {

@@ -1,6 +1,7 @@
 package com.fundatec.gamecenter
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,10 +34,14 @@ class ProdutosActivity : AppCompatActivity() {
     private fun readProdutos() {
         var url = "https://gamecenter-api.herokuapp.com/gamecenter/produtos"
 
-        var request = GsonRequest(
-            url, Array<ProdutosData>::class.java, null, Response.Listener { response ->
-                var adapter =
-                    ProdutosAdapter(baseContext, ArrayList(response.toList()))
+        var request = GsonRequest(url, Array<ProdutosData>::class.java, null, Response.Listener { response ->
+                var lista = ArrayList(response.toList())
+                if(lista.isEmpty()) {
+                    recyclerProdutos.visibility = View.GONE
+                    emptyProdutos.visibility = View.VISIBLE
+                }
+
+                var adapter = ProdutosAdapter(baseContext, lista)
                 recyclerProdutos.adapter = adapter
 
             },

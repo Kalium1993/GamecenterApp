@@ -22,6 +22,7 @@ import kotlinx.android.synthetic.main.content_usuario.*
 class UsuarioActivity : AppCompatActivity() {
 
     private var nick: String = ""
+    private var senha: String = ""
     private var queue : RequestQueue? = null
     private var idUsuario: String = ""
 
@@ -32,6 +33,7 @@ class UsuarioActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         nick = intent.getStringExtra("nick")
+        senha = intent.getStringExtra("senha")
         queue = Volley.newRequestQueue(baseContext)
         readUsuario()
 
@@ -76,49 +78,57 @@ class UsuarioActivity : AppCompatActivity() {
     }
 
     private fun readUsuario() {
-        var url = "https://gamecenter-api.herokuapp.com/gamecenter/usuario/$nick"
+        var url = if(senha.isEmpty())
+            "https://gamecenter-api.herokuapp.com/gamecenter/usuario/$nick"
+        else
+            "https://gamecenter-api.herokuapp.com/gamecenter/usuario/$nick/$senha/logar"
 
         var request = GsonJsonClassRequest(
             url,
             UsuariosData::class.java,
             Response.Listener { usuario ->
-                usuarioNick.setText(usuario.nick)
+                if (usuario != null) {
+                    usuarioNick.setText(usuario.nick)
 
-                if (usuario.nomeReal != null)
-                    usuarioNome.setText(usuario.nomeReal)
+                    if (usuario.nomeReal != null)
+                        usuarioNome.setText(usuario.nomeReal)
 
-                Picasso.get().load(usuario.foto).placeholder(R.drawable.no_photo).fit().centerCrop().into(usuarioFoto)
-                urlFoto.setText(usuario.foto)
-                usuarioEmail.setText(usuario.email)
-                usuarioSenha.setText(usuario.senha)
+                    Picasso.get().load(usuario.foto).placeholder(R.drawable.no_photo).fit().centerCrop().into(usuarioFoto)
+                    urlFoto.setText(usuario.foto)
+                    usuarioEmail.setText(usuario.email)
+                    usuarioSenha.setText(usuario.senha)
 
-                if(usuario.contato != null) {
-                    usuarioTel.setText(usuario.contato!!.telefone)
-                    usuarioEstado.setText(usuario.contato!!.estado)
-                    usuarioCid.setText(usuario.contato!!.cidade)
-                    usuarioRua.setText(usuario.contato!!.rua)
-                    usuarioNum.setText(usuario.contato!!.numero)
-                    usuarioCEP.setText(usuario.contato!!.cep)
-                }
-
-                if (usuario.vendedor!!) {
-                    acessarPerfilVendedor.visibility = View.VISIBLE
-                    ShowAtivarVendedor.text = "Desativar perfil de vendedor"
-                    ShowAtivarVendedor.setOnClickListener {
-                        val alerta = AlertDialog.Builder(this)
-                        alerta.setMessage("Ao desativar seu perfil de vendedor, todos seus produtos à venda também serão excluídos, deseja continuar?")
-                        alerta.setCancelable(false)
-                        alerta.setNegativeButton("Cancelar") { dialog, which ->
-
-                        }
-                        alerta.setPositiveButton("Confirmar"){ dialog, which ->
-                            desativarPerfilVendedor()
-                        }
-                        alerta.show()
+                    if(usuario.contato != null) {
+                        usuarioTel.setText(usuario.contato!!.telefone)
+                        usuarioEstado.setText(usuario.contato!!.estado)
+                        usuarioCid.setText(usuario.contato!!.cidade)
+                        usuarioRua.setText(usuario.contato!!.rua)
+                        usuarioNum.setText(usuario.contato!!.numero)
+                        usuarioCEP.setText(usuario.contato!!.cep)
                     }
-                }
-                idUsuario = usuario.id!!
 
+                    if (usuario.vendedor!!) {
+                        acessarPerfilVendedor.visibility = View.VISIBLE
+                        ShowAtivarVendedor.text = "Desativar perfil de vendedor"
+                        ShowAtivarVendedor.setOnClickListener {
+                            val alerta = AlertDialog.Builder(this)
+                            alerta.setMessage("Ao desativar seu perfil de vendedor, todos seus produtos à venda também serão excluídos, deseja continuar?")
+                            alerta.setCancelable(false)
+                            alerta.setNegativeButton("Cancelar") { dialog, which ->
+
+                            }
+                            alerta.setPositiveButton("Confirmar"){ dialog, which ->
+                                desativarPerfilVendedor()
+                            }
+                            alerta.show()
+                        }
+                    }
+                    idUsuario = usuario.id!!
+                } else {
+                    Toast.makeText( baseContext, "Não foi encontrado nenhum usuário com o nick/email e senha informados", Toast.LENGTH_LONG).show()
+                    val intent = Intent(baseContext, LoginActivity::class.java)
+                    startActivity(intent)
+                }
             },
             Response.ErrorListener { e ->
                 Toast.makeText( baseContext, "" + e.message, Toast.LENGTH_LONG).show()
@@ -150,6 +160,7 @@ class UsuarioActivity : AppCompatActivity() {
         var request = GsonJsonRequest(Request.Method.DELETE, url, VendedoresData::class.java, delete, Response.Listener { response ->
             val intent = Intent(baseContext, UsuarioActivity::class.java)
             intent.putExtra("nick", usuarioNick.text.toString())
+            intent.putExtra("senha", "")
             startActivity(intent)
             Toast.makeText(baseContext, "Perfil de vendedor desativado", Toast.LENGTH_SHORT).show()
         }, Response.ErrorListener { e ->
@@ -175,6 +186,7 @@ class UsuarioActivity : AppCompatActivity() {
         var request = GsonJsonRequest(Request.Method.PUT, url, UsuariosData::class.java, put, Response.Listener {
             val intent = Intent(baseContext, UsuarioActivity::class.java)
             intent.putExtra("nick", usuarioNick.text.toString())
+            intent.putExtra("senha", "")
             startActivity(intent)
         }, Response.ErrorListener { e ->
             Toast.makeText( baseContext, "" + e.message, Toast.LENGTH_LONG).show()

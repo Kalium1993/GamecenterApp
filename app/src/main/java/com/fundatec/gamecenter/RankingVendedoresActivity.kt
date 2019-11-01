@@ -1,6 +1,7 @@
 package com.fundatec.gamecenter
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,10 +34,14 @@ class RankingVendedoresActivity : AppCompatActivity() {
     private fun readVendedores() {
         var url = "https://gamecenter-api.herokuapp.com/gamecenter/Ranking-Vendedores"
 
-        var request = GsonRequest(
-            url, Array<VendedoresData>::class.java, null, Response.Listener { response ->
-                var adapter =
-                    RankingVendedoresAdapter(baseContext, ArrayList(response.toList()))
+        var request = GsonRequest(url, Array<VendedoresData>::class.java, null, Response.Listener { response ->
+                var lista = ArrayList(response.toList())
+                if(lista.isEmpty()) {
+                    recyclerRankingVendedores.visibility = View.GONE
+                    emptyRanking.visibility = View.VISIBLE
+                }
+
+                var adapter = RankingVendedoresAdapter(baseContext, lista)
                 recyclerRankingVendedores.adapter = adapter
 
             },

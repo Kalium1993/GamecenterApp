@@ -57,6 +57,7 @@ class UsuariosAdapter (var context: Context, var usuarios: ArrayList<UsuariosDat
                 val context = v.context
                 val intent = Intent(context, UsuarioActivity::class.java)
                 intent.putExtra("nick", item.nick)
+                intent.putExtra("senha", "")
                 context.startActivity(intent)
             }
 

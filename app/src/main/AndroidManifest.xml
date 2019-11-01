@@ -13,9 +13,17 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".JogoActivity"
+            android:label="@string/title_activity_jogo"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".RankingJogosActivity"
+            android:label="@string/title_activity_ranking_jogos"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".ComunidadeActivity"
             android:label="@string/title_activity_comunidade"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".PesquisaGeralActivity"
             android:label="@string/title_activity_pesquisa_geral"
