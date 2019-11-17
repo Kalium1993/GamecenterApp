@@ -44,6 +44,7 @@ class RankingJogosAdapter (var context: Context, var jogos: ArrayList<JogosData>
 
         fun bindItems(item: JogosData, i: Int, size: Int) {
             itemView.jogoTituloR.text = item.titulo
+            itemView.jogoPlataformaR.text = "Plataforma: " + item.plataforma
             itemView.jogoNotaMidiaR.text = "Nota da Midia: " +item.notaMidia
             itemView.jogoNotaUsuariosR.text = "Nota dos Usuários: " +item.notaUsuarios
 

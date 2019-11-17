@@ -8,6 +8,8 @@ data class JogosData(
 ) {
     @SerializedName("foto")
     var foto: String? = null
+    @SerializedName("plataforma")
+    var plataforma: String? = null
     @SerializedName("_id")
     var id: String? = null
     @SerializedName("notaMidia")

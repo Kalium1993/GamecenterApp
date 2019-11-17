@@ -52,6 +52,7 @@ class JogoActivity : AppCompatActivity() {
             Response.Listener { jogo ->
                 Picasso.get().load(jogo.foto).placeholder(R.drawable.no_img).fit().centerCrop().into(jogoFoto)
                 jogoTitulo.text = jogo.titulo
+                jogoPlataforma.text = "Plataforma: " + jogo.plataforma
                 jogoNotaMidia.text = "Nota da Mídia: " +jogo.notaMidia
                 jogoNotaUsuarios.text = "Nota dos Usuários: " +jogo.notaUsuarios
             },

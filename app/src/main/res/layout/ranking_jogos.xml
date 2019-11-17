@@ -45,7 +45,7 @@
         android:layout_marginTop="8dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/jogoTituloR" />
+        app:layout_constraintTop_toBottomOf="@+id/jogoPlataformaR" />
 
     <TextView
         android:id="@+id/jogoNotaUsuariosR"
@@ -71,4 +71,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/jogoNotaUsuariosR" />
+
+    <TextView
+        android:id="@+id/jogoPlataformaR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/jogoTituloR" />
 </androidx.constraintlayout.widget.ConstraintLayout>
