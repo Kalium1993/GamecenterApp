@@ -17,6 +17,7 @@ import com.fundatec.gamecenter.filter.RangeFilter
 import com.fundatec.gamecenter.jsonData.ProdutosData
 import com.fundatec.gamecenter.request.GsonJsonClassRequest
 import com.fundatec.gamecenter.request.GsonJsonRequest
+import com.fundatec.gamecenter.shared.Logado
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 
@@ -27,7 +28,8 @@ class ProdutoActivity : AppCompatActivity() {
 
     private var nickVendedor: String = ""
     private var idProduto: String = ""
-
+    private var nickLogado: String = ""
+    private var idLogado: String = ""
     private var queue : RequestQueue? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,13 +40,17 @@ class ProdutoActivity : AppCompatActivity() {
         nickVendedor = intent.getStringExtra("nickVendedor")
         idProduto = intent.getStringExtra("idProduto")
 
+        val logado = Logado(this)
+        idLogado = logado.getLogadoId()
+        nickLogado = logado.getLogadoNick()
+
         queue = Volley.newRequestQueue(baseContext)
         readProduto()
 
         comprarProduto.setOnClickListener {
-            findViewById<EditText>(R.id.cmmCompra).visibility = View.VISIBLE
-            findViewById<EditText>(R.id.notaVenda).visibility = View.VISIBLE
-            findViewById<Button>(R.id.confirmar).visibility = View.VISIBLE
+            cmmCompra.visibility = View.VISIBLE
+            notaVenda.visibility = View.VISIBLE
+            confirmar.visibility = View.VISIBLE
 
             confirmar.setOnClickListener { v ->
                 comprar()
@@ -83,6 +89,12 @@ class ProdutoActivity : AppCompatActivity() {
                 freteProduto.text = "Frete: R$" + produto.frete
                 nomeProdutoP.text = produto.nome
                 descricaoProdutoP.text = produto.descricao
+
+                if (produto.nickVendedor == nickLogado) {
+                    comprarProduto.visibility = View.GONE
+                    deletarProduto.visibility = View.VISIBLE
+                }
+
 
                 vendedor.setOnClickListener { v ->
                     val context = v.context

@@ -1,6 +1,7 @@
 package com.fundatec.gamecenter
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -13,6 +14,7 @@ import com.android.volley.toolbox.Volley
 import com.fundatec.gamecenter.jsonData.*
 import com.fundatec.gamecenter.request.GsonJsonClassRequest
 import com.fundatec.gamecenter.request.GsonJsonRequest
+import com.fundatec.gamecenter.shared.Logado
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 
@@ -26,7 +28,6 @@ class UsuarioActivity : AppCompatActivity() {
     private var queue : RequestQueue? = null
     private var idUsuario: String = ""
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_usuario)
@@ -35,7 +36,9 @@ class UsuarioActivity : AppCompatActivity() {
         nick = intent.getStringExtra("nick")
         senha = intent.getStringExtra("senha")
         queue = Volley.newRequestQueue(baseContext)
-        readUsuario()
+        val logado = Logado(this)
+
+        readUsuario(logado)
 
         ShowAtivarVendedor.setOnClickListener {
             msgCPF.visibility = View.VISIBLE
@@ -74,10 +77,9 @@ class UsuarioActivity : AppCompatActivity() {
             intent.putExtra("nickVendedor", nick)
             context.startActivity(intent)
         }
-
     }
 
-    private fun readUsuario() {
+    private fun readUsuario(logado: Logado) {
         var url = if(senha.isEmpty())
             "https://gamecenter-api.herokuapp.com/gamecenter/usuario/$nick"
         else
@@ -124,6 +126,12 @@ class UsuarioActivity : AppCompatActivity() {
                         }
                     }
                     idUsuario = usuario.id!!
+
+                    if (senha.isNotEmpty()) {
+                        logado.setLogadoId(usuario.id!!)
+                        logado.setLogadoNick(usuario.nick)
+                    }
+
                 } else {
                     Toast.makeText( baseContext, "Não foi encontrado nenhum usuário com o nick/email e senha informados", Toast.LENGTH_LONG).show()
                     val intent = Intent(baseContext, LoginActivity::class.java)

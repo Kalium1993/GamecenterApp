@@ -15,6 +15,7 @@ import com.fundatec.gamecenter.ProdutoPostActivity
 import com.fundatec.gamecenter.R
 import com.fundatec.gamecenter.jsonData.VendedoresData
 import com.fundatec.gamecenter.request.GsonJsonClassRequest
+import com.fundatec.gamecenter.shared.Logado
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_vendedor.*
 
@@ -24,6 +25,8 @@ class VendedorFragment : Fragment() {
 
     private var nickVendedor: String? = null
     private var queue : RequestQueue? = null
+    private var nickLogado: String = ""
+    private var idLogado: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +39,9 @@ class VendedorFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         queue = Volley.newRequestQueue(activity?.baseContext)
+        val logado = Logado(requireContext())
+        idLogado = logado.getLogadoId()
+        nickLogado = logado.getLogadoNick()
         readVendedor()
     }
 
@@ -65,7 +71,8 @@ class VendedorFragment : Fragment() {
                     notaVendedor.text = "(Nenhuma venda efetuada)"
                 }
 
-
+                if(vendedor.usuario!!.nick == nickLogado)
+                    anunciarProduto.visibility = View.VISIBLE
 
                 anunciarProduto.setOnClickListener { v ->
                     val context =  v.context
