@@ -27,6 +27,8 @@ class UsuarioActivity : AppCompatActivity() {
     private var senha: String = ""
     private var queue : RequestQueue? = null
     private var idUsuario: String = ""
+    private var nickLogado: String = ""
+    private var idLogado: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,10 +69,6 @@ class UsuarioActivity : AppCompatActivity() {
             alerta.show()
         }
 
-        usuarioFoto.setOnClickListener {
-            urlFoto.visibility = View.VISIBLE
-        }
-
         acessarPerfilVendedor.setOnClickListener { v ->
             val context = v.context
             val intent = Intent(context, VendedorActivity::class.java)
@@ -90,10 +88,18 @@ class UsuarioActivity : AppCompatActivity() {
             UsuariosData::class.java,
             Response.Listener { usuario ->
                 if (usuario != null) {
-                    usuarioNick.setText(usuario.nick)
+                    if (senha.isNotEmpty()) {
+                        logado.setLogadoId(usuario.id!!)
+                        logado.setLogadoNick(usuario.nick)
+                    }
 
-                    if (usuario.nomeReal != null)
+                    usuarioNick.setText(usuario.nick)
+                    usuarioNickView.text = usuario.nick
+
+                    if (usuario.nomeReal != null) {
                         usuarioNome.setText(usuario.nomeReal)
+                        usuarioNomeView.text = "(${usuario.nomeReal})"
+                    }
 
                     Picasso.get().load(usuario.foto).placeholder(R.drawable.no_photo).fit().centerCrop().into(usuarioFoto)
                     urlFoto.setText(usuario.foto)
@@ -127,9 +133,42 @@ class UsuarioActivity : AppCompatActivity() {
                     }
                     idUsuario = usuario.id!!
 
-                    if (senha.isNotEmpty()) {
-                        logado.setLogadoId(usuario.id!!)
-                        logado.setLogadoNick(usuario.nick)
+                    idLogado = logado.getLogadoId()
+                    nickLogado = logado.getLogadoNick()
+
+                    if (idUsuario == idLogado) {
+                        usuarioFoto.setOnClickListener {
+                            urlFoto.visibility = View.VISIBLE
+                        }
+
+                        btnDeslogar.visibility = View.VISIBLE
+                        btnDeslogar.setOnClickListener {
+                            deslogar(logado)
+                        }
+                    } else {
+                        endContato.visibility = View.GONE
+                        txtEmail.visibility = View.GONE
+                        usuarioEmail.visibility = View.GONE
+                        txtTel.visibility = View.GONE
+                        usuarioTel.visibility = View.GONE
+                        txtEstado.visibility = View.GONE
+                        usuarioEstado.visibility = View.GONE
+                        txtCidade.visibility = View.GONE
+                        usuarioCid.visibility = View.GONE
+                        txtRua.visibility = View.GONE
+                        usuarioRua.visibility = View.GONE
+                        txtNum.visibility = View.GONE
+                        usuarioNum.visibility = View.GONE
+                        txtCEP.visibility = View.GONE
+                        usuarioCEP.visibility = View.GONE
+                        editarUsuario.visibility = View.GONE
+                        deletarUsuario.visibility = View.GONE
+                        ShowAtivarVendedor.visibility = View.GONE
+                        usuarioNick.visibility = View.GONE
+                        usuarioNome.visibility = View.GONE
+                        usuarioSenha.visibility = View.GONE
+                        usuarioNomeView.visibility = View.VISIBLE
+                        usuarioNickView.visibility = View.VISIBLE
                     }
 
                 } else {
@@ -194,7 +233,7 @@ class UsuarioActivity : AppCompatActivity() {
         var request = GsonJsonRequest(Request.Method.PUT, url, UsuariosData::class.java, put, Response.Listener {
             val intent = Intent(baseContext, UsuarioActivity::class.java)
             intent.putExtra("nick", usuarioNick.text.toString())
-            intent.putExtra("senha", "")
+            intent.putExtra("senha", usuarioSenha.text.toString())
             startActivity(intent)
         }, Response.ErrorListener { e ->
             Toast.makeText( baseContext, "" + e.message, Toast.LENGTH_LONG).show()
@@ -218,6 +257,14 @@ class UsuarioActivity : AppCompatActivity() {
         })
 
         queue?.add(request)
+    }
+
+    private fun deslogar(logado: Logado) {
+        logado.setLogadoId("")
+        logado.setLogadoNick("")
+        val intent = Intent(baseContext, MainActivity::class.java)
+        startActivity(intent)
+        Toast.makeText(baseContext, "Deslogado(a) com sucesso", Toast.LENGTH_SHORT).show()
     }
 
 }

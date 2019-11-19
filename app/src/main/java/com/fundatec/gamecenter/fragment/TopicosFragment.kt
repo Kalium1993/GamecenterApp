@@ -8,17 +8,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
 import com.fundatec.gamecenter.ComunidadeActivity
+import com.fundatec.gamecenter.LoginActivity
 import com.fundatec.gamecenter.R
 import com.fundatec.gamecenter.TopicoPostActivity
 import com.fundatec.gamecenter.adapter.TopicosAdapter
 import com.fundatec.gamecenter.jsonData.TopicosData
 import com.fundatec.gamecenter.request.GsonRequest
+import com.fundatec.gamecenter.shared.Logado
 import kotlinx.android.synthetic.main.fragment_topicos.*
 
 private const val ID_COMUNIDADE = "idComunidade"
@@ -28,6 +31,8 @@ class TopicosFragment : Fragment() {
     private var idComunidade: String? = null
     private var pesquisa: String? = null
     private var queue : RequestQueue? = null
+    private var nickLogado: String = ""
+    private var idLogado: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +46,11 @@ class TopicosFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         queue = Volley.newRequestQueue(activity?.baseContext)
         recyclerTopicos.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+
+        val logado = Logado(requireContext())
+        idLogado = logado.getLogadoId()
+        nickLogado = logado.getLogadoNick()
+
         readTopicos()
         postTopico()
         pesquisa()
@@ -76,10 +86,24 @@ class TopicosFragment : Fragment() {
 
     private fun postTopico() {
         criarTopico.setOnClickListener { v ->
-            val context =  v.context
-            val intent = Intent(context, TopicoPostActivity::class.java)
-            intent.putExtra("idComunidade", idComunidade)
-            context.startActivity(intent)
+            if(nickLogado.isEmpty() && idLogado.isEmpty()) {
+                val alerta = AlertDialog.Builder(activity!!)
+                alerta.setMessage("Você precisa efetuar login para criar um tópico.")
+                alerta.setCancelable(false)
+                alerta.setNegativeButton("Cancelar") { dialog, which ->
+
+                }
+                alerta.setPositiveButton("OK"){ dialog, which ->
+                    val intent = Intent(requireContext(), LoginActivity::class.java)
+                    startActivity(intent)
+                }
+                alerta.show()
+            } else {
+                val context =  v.context
+                val intent = Intent(context, TopicoPostActivity::class.java)
+                intent.putExtra("idComunidade", idComunidade)
+                context.startActivity(intent)
+            }
         }
     }
 

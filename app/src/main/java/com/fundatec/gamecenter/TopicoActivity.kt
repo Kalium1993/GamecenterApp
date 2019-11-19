@@ -17,6 +17,7 @@ import com.fundatec.gamecenter.jsonData.TopicosData
 import com.fundatec.gamecenter.request.GsonJsonClassRequest
 import com.fundatec.gamecenter.request.GsonJsonRequest
 import com.fundatec.gamecenter.request.GsonRequest
+import com.fundatec.gamecenter.shared.Logado
 import com.google.gson.Gson
 
 import kotlinx.android.synthetic.main.activity_topico.*
@@ -26,6 +27,8 @@ class TopicoActivity : AppCompatActivity() {
 
     private var idComunidade: String = ""
     private var idTopico: String = ""
+    private var nickLogado: String = ""
+    private var idLogado: String = ""
     private var queue : RequestQueue? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +41,10 @@ class TopicoActivity : AppCompatActivity() {
         queue = Volley.newRequestQueue(baseContext)
         recyclerMensagens.layoutManager = LinearLayoutManager(baseContext, RecyclerView.VERTICAL, false)
 
+        val logado = Logado(this)
+        idLogado = logado.getLogadoId()
+        nickLogado = logado.getLogadoNick()
+
         readTopico()
         readMensagens()
 
@@ -46,16 +53,30 @@ class TopicoActivity : AppCompatActivity() {
         }
 
         delTopico.setOnClickListener {
-            val alerta = AlertDialog.Builder(this)
-            alerta.setMessage("Ao deletar o Tópico, todas as mensagens do mesmo também serão deletadas, e esta ação não poderá ser desfeita, confirmar?")
-            alerta.setCancelable(false)
-            alerta.setNegativeButton("Cancelar") { dialog, which ->
+            if(nickLogado.isEmpty() && idLogado.isEmpty()) {
+                val alerta = AlertDialog.Builder(this)
+                alerta.setMessage("Você precisa efetuar login para deletar o tópico.")
+                alerta.setCancelable(false)
+                alerta.setNegativeButton("Cancelar") { dialog, which ->
 
+                }
+                alerta.setPositiveButton("OK"){ dialog, which ->
+                    val intent = Intent(baseContext, LoginActivity::class.java)
+                    startActivity(intent)
+                }
+                alerta.show()
+            } else {
+                val alerta = AlertDialog.Builder(this)
+                alerta.setMessage("Ao deletar o Tópico, todas as mensagens do mesmo também serão deletadas, e esta ação não poderá ser desfeita, confirmar?")
+                alerta.setCancelable(false)
+                alerta.setNegativeButton("Cancelar") { dialog, which ->
+
+                }
+                alerta.setPositiveButton("Confirmar"){ dialog, which ->
+                    deletarTopico()
+                }
+                alerta.show()
             }
-            alerta.setPositiveButton("Confirmar"){ dialog, which ->
-                deletarTopico()
-            }
-            alerta.show()
         }
 
     }
@@ -94,20 +115,34 @@ class TopicoActivity : AppCompatActivity() {
     }
 
     private fun enviar() {
-        var url = "https://gamecenter-api.herokuapp.com/gamecenter/comunidade/$idComunidade/topico/$idTopico/mensagem/post"
+        if(nickLogado.isEmpty() && idLogado.isEmpty()) {
+            val alerta = AlertDialog.Builder(this)
+            alerta.setMessage("Você precisa efetuar login para postar uma mensagem.")
+            alerta.setCancelable(false)
+            alerta.setNegativeButton("Cancelar") { dialog, which ->
 
-        var mensagem = MensagensData(mensagemEnviar.text.toString())
-        var post = Gson().toJson(mensagem)
+            }
+            alerta.setPositiveButton("OK"){ dialog, which ->
+                val intent = Intent(baseContext, LoginActivity::class.java)
+                startActivity(intent)
+            }
+            alerta.show()
+        } else {
+            var url = "https://gamecenter-api.herokuapp.com/gamecenter/comunidade/$idComunidade/topico/$idTopico/mensagem/$idLogado/post"
 
-        var request = GsonJsonRequest(Request.Method.POST, url, MensagensData::class.java, post, Response.Listener { response ->
-            val intent = Intent(baseContext, TopicoActivity::class.java)
-            intent.putExtra("idComunidade", idComunidade)
-            intent.putExtra("idTopico", idTopico)
-            startActivity(intent)
-        }, Response.ErrorListener { e ->
-            Toast.makeText( baseContext, "" + e.message, Toast.LENGTH_LONG).show()
-        })
-        queue?.add(request)
+            var mensagem = MensagensData(mensagemEnviar.text.toString())
+            var post = Gson().toJson(mensagem)
+
+            var request = GsonJsonRequest(Request.Method.POST, url, MensagensData::class.java, post, Response.Listener { response ->
+                val intent = Intent(baseContext, TopicoActivity::class.java)
+                intent.putExtra("idComunidade", idComunidade)
+                intent.putExtra("idTopico", idTopico)
+                startActivity(intent)
+            }, Response.ErrorListener { e ->
+                Toast.makeText( baseContext, "" + e.message, Toast.LENGTH_LONG).show()
+            })
+            queue?.add(request)
+        }
     }
 
     private fun deletarTopico() {

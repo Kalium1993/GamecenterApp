@@ -69,11 +69,6 @@ class ProdutosVendedorAdapter(var context: Context, var produtos: ArrayList<Prod
                 itemView.descricaoProdutoVendedor.text = comentario
                 itemView.notaVendaProduto.text = "Nota da Venda: " + item.notaVenda
             }
-
-            if (i == (size - 1)) {
-                itemView.divider.visibility = View.GONE
-            }
-
         }
     }
 

@@ -13,6 +13,7 @@ import com.fundatec.gamecenter.jsonData.ComunidadesData
 import com.fundatec.gamecenter.jsonData.MensagensData
 import com.fundatec.gamecenter.jsonData.TopicosData
 import com.fundatec.gamecenter.request.GsonJsonRequest
+import com.fundatec.gamecenter.shared.Logado
 import com.google.gson.Gson
 
 import kotlinx.android.synthetic.main.activity_topico_post.*
@@ -23,6 +24,8 @@ class TopicoPostActivity : AppCompatActivity() {
     private var idComunidade: String = ""
     private var idTopico: String = ""
     private var queue : RequestQueue? = null
+    private var nickLogado: String = ""
+    private var idLogado: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +34,10 @@ class TopicoPostActivity : AppCompatActivity() {
 
         idComunidade = intent.getStringExtra("idComunidade")
         queue = Volley.newRequestQueue(baseContext)
+
+        val logado = Logado(this)
+        idLogado = logado.getLogadoId()
+        nickLogado = logado.getLogadoNick()
 
         criarTopico.setOnClickListener {
             criar()
@@ -60,7 +67,7 @@ class TopicoPostActivity : AppCompatActivity() {
     }
 
     private fun enviar() {
-        var url = "https://gamecenter-api.herokuapp.com/gamecenter/comunidade/$idComunidade/topico/$idTopico/mensagem/post"
+        var url = "https://gamecenter-api.herokuapp.com/gamecenter/comunidade/$idComunidade/topico/$idTopico/mensagem/$idLogado/post"
 
         var mensagaem = MensagensData(msgTopico.text.toString())
         var post = Gson().toJson(mensagaem)

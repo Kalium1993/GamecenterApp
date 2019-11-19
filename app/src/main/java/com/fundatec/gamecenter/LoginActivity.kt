@@ -72,7 +72,7 @@ class LoginActivity : AppCompatActivity() {
             var request = GsonJsonRequest(Request.Method.POST, url, UsuariosData::class.java, post, Response.Listener {
                 val intent = Intent(baseContext, UsuarioActivity::class.java)
                 intent.putExtra("nick", registrarNick.text.toString())
-                intent.putExtra("senha", "")
+                intent.putExtra("senha", registrarSenha.text.toString())
                 startActivity(intent)
             }, Response.ErrorListener { e ->
                 Toast.makeText( baseContext, "" + e.message, Toast.LENGTH_LONG).show()

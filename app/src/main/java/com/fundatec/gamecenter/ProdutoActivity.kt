@@ -48,14 +48,27 @@ class ProdutoActivity : AppCompatActivity() {
         readProduto()
 
         comprarProduto.setOnClickListener {
-            cmmCompra.visibility = View.VISIBLE
-            notaVenda.visibility = View.VISIBLE
-            confirmar.visibility = View.VISIBLE
+            if(nickLogado.isEmpty() && idLogado.isEmpty()) {
+                val alerta = AlertDialog.Builder(this)
+                alerta.setMessage("Você precisa efetuar login para concluir a compra.")
+                alerta.setCancelable(false)
+                alerta.setNegativeButton("Cancelar") { dialog, which ->
 
-            confirmar.setOnClickListener { v ->
-                comprar()
+                }
+                alerta.setPositiveButton("OK"){ dialog, which ->
+                    val intent = Intent(baseContext, LoginActivity::class.java)
+                    startActivity(intent)
+                }
+                alerta.show()
+            } else {
+                cmmCompra.visibility = View.VISIBLE
+                notaVenda.visibility = View.VISIBLE
+                confirmar.visibility = View.VISIBLE
+
+                confirmar.setOnClickListener { v ->
+                    comprar()
+                }
             }
-
         }
 
         deletarProduto.setOnClickListener {

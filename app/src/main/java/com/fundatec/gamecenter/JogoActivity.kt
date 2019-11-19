@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
@@ -13,6 +14,7 @@ import com.android.volley.toolbox.Volley
 import com.fundatec.gamecenter.jsonData.JogosData
 import com.fundatec.gamecenter.request.GsonJsonClassRequest
 import com.fundatec.gamecenter.request.GsonJsonRequest
+import com.fundatec.gamecenter.shared.Logado
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 
@@ -22,6 +24,8 @@ import kotlinx.android.synthetic.main.content_jogo.*
 class JogoActivity : AppCompatActivity() {
 
     private var idJogo: String = ""
+    private var nickLogado: String = ""
+    private var idLogado: String = ""
     private var queue : RequestQueue? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,12 +37,30 @@ class JogoActivity : AppCompatActivity() {
         queue = Volley.newRequestQueue(baseContext)
         readJogo()
 
-        darNotaJogo.setOnClickListener {
-            notaJogo.visibility = View.VISIBLE
-            salvarNotaJogo.visibility = View.VISIBLE
+        val logado = Logado(this)
+        idLogado = logado.getLogadoId()
+        nickLogado = logado.getLogadoNick()
 
-            salvarNotaJogo.setOnClickListener {
-                salvarNota()
+        darNotaJogo.setOnClickListener {
+            if(nickLogado.isEmpty() && idLogado.isEmpty()) {
+                val alerta = AlertDialog.Builder(this)
+                alerta.setMessage("Você precisa efetuar login para dar nota ao jogo.")
+                alerta.setCancelable(false)
+                alerta.setNegativeButton("Cancelar") { dialog, which ->
+
+                }
+                alerta.setPositiveButton("OK"){ dialog, which ->
+                    val intent = Intent(baseContext, LoginActivity::class.java)
+                    startActivity(intent)
+                }
+                alerta.show()
+            } else {
+                notaJogo.visibility = View.VISIBLE
+                salvarNotaJogo.visibility = View.VISIBLE
+
+                salvarNotaJogo.setOnClickListener {
+                    salvarNota()
+                }
             }
         }
     }

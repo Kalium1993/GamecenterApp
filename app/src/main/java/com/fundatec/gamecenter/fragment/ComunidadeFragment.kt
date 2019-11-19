@@ -14,12 +14,14 @@ import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
+import com.fundatec.gamecenter.LoginActivity
 import com.fundatec.gamecenter.MainActivity
 
 import com.fundatec.gamecenter.R
 import com.fundatec.gamecenter.jsonData.ComunidadesData
 import com.fundatec.gamecenter.request.GsonJsonClassRequest
 import com.fundatec.gamecenter.request.GsonJsonRequest
+import com.fundatec.gamecenter.shared.Logado
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_comunidade.*
@@ -30,6 +32,8 @@ private const val ID_COMUNIDADE = "idComunidade"
 class ComunidadeFragment : Fragment() {
     private var idComunidade: String? = null
     private var queue : RequestQueue? = null
+    private var nickLogado: String = ""
+    private var idLogado: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,17 +47,35 @@ class ComunidadeFragment : Fragment() {
         queue = Volley.newRequestQueue(activity?.baseContext)
         readComunidade()
 
-        deleteCmm.setOnClickListener {
-            val alerta = AlertDialog.Builder(activity!!)
-            alerta.setMessage("Ao deletar a comunidade, todos os tópicos, e as mensagens dos mesmos, também serão excluídos, deseja continuar?")
-            alerta.setCancelable(false)
-            alerta.setNegativeButton("Cancelar") { dialog, which ->
+        val logado = Logado(requireContext())
+        idLogado = logado.getLogadoId()
+        nickLogado = logado.getLogadoNick()
 
+        deleteCmm.setOnClickListener {
+            if(nickLogado.isEmpty() && idLogado.isEmpty()) {
+                val alerta = AlertDialog.Builder(activity!!)
+                alerta.setMessage("Você precisa efetuar login para deletar a comunidade.")
+                alerta.setCancelable(false)
+                alerta.setNegativeButton("Cancelar") { dialog, which ->
+
+                }
+                alerta.setPositiveButton("OK"){ dialog, which ->
+                    val intent = Intent(requireContext(), LoginActivity::class.java)
+                    startActivity(intent)
+                }
+                alerta.show()
+            } else {
+                val alerta = AlertDialog.Builder(activity!!)
+                alerta.setMessage("Ao deletar a comunidade, todos os tópicos, e as mensagens dos mesmos, também serão excluídos, deseja continuar?")
+                alerta.setCancelable(false)
+                alerta.setNegativeButton("Cancelar") { dialog, which ->
+
+                }
+                alerta.setPositiveButton("Confirmar"){ dialog, which ->
+                    deleteComuidade()
+                }
+                alerta.show()
             }
-            alerta.setPositiveButton("Confirmar"){ dialog, which ->
-                deleteComuidade()
-            }
-            alerta.show()
         }
     }
 

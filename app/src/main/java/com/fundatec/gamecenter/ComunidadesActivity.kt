@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +16,7 @@ import com.android.volley.toolbox.Volley
 import com.fundatec.gamecenter.adapter.ComunidadesAdapter
 import com.fundatec.gamecenter.jsonData.ComunidadesData
 import com.fundatec.gamecenter.request.GsonRequest
+import com.fundatec.gamecenter.shared.Logado
 
 import kotlinx.android.synthetic.main.activity_comunidades.*
 import kotlinx.android.synthetic.main.content_comunidades.*
@@ -23,6 +25,8 @@ class ComunidadesActivity : AppCompatActivity() {
 
     private var queue : RequestQueue? = null
     private var pesquisa: String = ""
+    private var nickLogado: String = ""
+    private var idLogado: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +36,11 @@ class ComunidadesActivity : AppCompatActivity() {
         pesquisa = intent.getStringExtra("pesquisa")
         queue = Volley.newRequestQueue(baseContext)
         recyclerComunidades.layoutManager = LinearLayoutManager(baseContext, RecyclerView.VERTICAL, false)
+
+        val logado = Logado(this)
+        idLogado = logado.getLogadoId()
+        nickLogado = logado.getLogadoNick()
+
         readComunidades()
         createComunidade()
         pesquisa()
@@ -94,10 +103,24 @@ class ComunidadesActivity : AppCompatActivity() {
     }
 
     private fun createComunidade() {
-        criarComunidade.setOnClickListener { v ->
-            val context = v.context
-            val intent = Intent(context, ComunidadePostActivity::class.java)
-            context.startActivity(intent)
+        if(nickLogado.isEmpty() && idLogado.isEmpty()) {
+            val alerta = AlertDialog.Builder(this)
+            alerta.setMessage("Você precisa efetuar login para concluir a compra.")
+            alerta.setCancelable(false)
+            alerta.setNegativeButton("Cancelar") { dialog, which ->
+
+            }
+            alerta.setPositiveButton("OK"){ dialog, which ->
+                val intent = Intent(baseContext, LoginActivity::class.java)
+                startActivity(intent)
+            }
+            alerta.show()
+        } else {
+            criarComunidade.setOnClickListener { v ->
+                val context = v.context
+                val intent = Intent(context, ComunidadePostActivity::class.java)
+                context.startActivity(intent)
+            }
         }
     }
 
