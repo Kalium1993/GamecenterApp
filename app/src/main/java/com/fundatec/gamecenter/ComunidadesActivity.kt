@@ -103,20 +103,20 @@ class ComunidadesActivity : AppCompatActivity() {
     }
 
     private fun createComunidade() {
-        if(nickLogado.isEmpty() && idLogado.isEmpty()) {
-            val alerta = AlertDialog.Builder(this)
-            alerta.setMessage("Você precisa efetuar login para concluir a compra.")
-            alerta.setCancelable(false)
-            alerta.setNegativeButton("Cancelar") { dialog, which ->
+        criarComunidade.setOnClickListener { v ->
+            if(nickLogado.isEmpty() && idLogado.isEmpty()) {
+                val alerta = AlertDialog.Builder(this)
+                alerta.setMessage("Você precisa efetuar login para criar uma comunidade.")
+                alerta.setCancelable(false)
+                alerta.setNegativeButton("Cancelar") { dialog, which ->
 
-            }
-            alerta.setPositiveButton("OK"){ dialog, which ->
-                val intent = Intent(baseContext, LoginActivity::class.java)
-                startActivity(intent)
-            }
-            alerta.show()
-        } else {
-            criarComunidade.setOnClickListener { v ->
+                }
+                alerta.setPositiveButton("OK"){ dialog, which ->
+                    val intent = Intent(baseContext, LoginActivity::class.java)
+                    startActivity(intent)
+                }
+                alerta.show()
+            } else {
                 val context = v.context
                 val intent = Intent(context, ComunidadePostActivity::class.java)
                 context.startActivity(intent)
